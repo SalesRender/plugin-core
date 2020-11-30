@@ -23,7 +23,7 @@
     "adbario/php-dot-notation": "^2.2",
     "khill/php-duration": "^1.0",
     "leadvertex/plugin-component-form": "^0.9.0",
-    "leadvertex/plugin-component-developer": "^0.0.2",
+    "leadvertex/plugin-component-developer": "^0.1.0",
     "leadvertex/plugin-component-purpose": "^1.3",
     "leadvertex/plugin-component-process": "^0.4.3",
     "leadvertex/plugin-component-api-client": "^0.5.0",
