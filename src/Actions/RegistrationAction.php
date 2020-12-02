@@ -36,7 +36,7 @@ class RegistrationAction implements ActionInterface
         $registration = new Registration($token);
         $registration->save();
 
-        return $response;
+        return $response->withJson(['registered' => true]);
     }
 
 }
