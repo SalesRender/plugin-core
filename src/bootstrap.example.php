@@ -6,6 +6,7 @@
  */
 
 use Leadvertex\Plugin\Components\Batch\BatchFormRegistry;
+use Leadvertex\Plugin\Components\Batch\BatchHandler;
 use Leadvertex\Plugin\Components\Db\Components\Connector;
 use Leadvertex\Plugin\Components\Form\Components\AutocompleteRegistry;
 use Leadvertex\Plugin\Components\Form\Form;
@@ -17,13 +18,9 @@ use Leadvertex\Plugin\Components\Translations\Translator;
 use Medoo\Medoo;
 use XAKEPEHOK\Path\Path;
 
-# 0. Configure environment variable in .env file, that placed into root of app (preferred), or here
-//$_ENV['LV_PLUGIN_DEBUG'] = 1;
-//$_ENV['LV_PLUGIN_PHP_BINARY'] = 'php';
-//$_ENV['LV_PLUGIN_QUEUE_LIMIT'] = 1;
-//$_ENV['LV_PLUGIN_SELF_URI'] = 'http://plugin/';
+# 0. Configure environment variable in .env file, that placed into root of app
 
-# 1. Configure DB
+# 1. Configure DB (for SQLite *.db file and parent directory should be writable)
 Connector::config(new Medoo([
     'database_type' => 'sqlite',
     'database_file' => Path::root()->down('db/database.db')
@@ -53,19 +50,24 @@ SettingsForm::config(
     fn() => Translator::get('settings', 'button'),
 );
 
-# 5. Configure batch forms (if you plugin use batches, or remove this block)
+# 5. Configure form autocompletes (if some plugin forms use autocompletes, or remove this block)
+AutocompleteRegistry::config(function (string $name) {
+//    switch ($name) {
+//        case 'status': return new StatusAutocomplete();
+//        case 'user': return new UserAutocomplete();
+//        default: return null;
+//    }
+});
+
+# 6. Configure batch forms (if you plugin use batches, or remove this block)
 BatchFormRegistry::config(function (int $number) {
 //    switch ($number) {
 //        case 1: return new Form();
 //        case 2: return new Form();
 //        case 3: return new Form();
+//        default: return null;
 //    }
 });
 
-# 6. Configure form autocompletes (if some plugin forms use autocompletes, or remove this block)
-AutocompleteRegistry::config(function (string $name) {
-//    switch ($name) {
-//        case 'status': return new StatusAutocomplete();
-//        case 'user': return new UserAutocomplete();
-//    }
-});
+# 6.1 Configure batch handler (if you plugin use batches, or remove this block)
+BatchHandler::config(/*new BatchHandlerInterface()*/);

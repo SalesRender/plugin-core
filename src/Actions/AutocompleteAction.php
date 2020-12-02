@@ -8,25 +8,17 @@
 namespace Leadvertex\Plugin\Components\Core\Actions;
 
 
-use Leadvertex\Plugin\Components\Form\Components\AutocompleteInterface;
+use Leadvertex\Plugin\Components\Form\Components\AutocompleteRegistry;
 use Slim\Http\Response;
 use Slim\Http\ServerRequest;
 
 class AutocompleteAction implements ActionInterface
 {
 
-    /** @var AutocompleteInterface[] */
-    protected array $autocompletes;
-
-    public function __construct(array $autocompletes)
-    {
-        $this->autocompletes = $autocompletes;
-    }
 
     public function __invoke(ServerRequest $request, Response $response, array $args): Response
     {
-        $autocomplete = $this->autocompletes[$args['name']] ?? null;
-
+        $autocomplete = AutocompleteRegistry::getAutocomplete($args['name']);
         if (is_null($autocomplete)) {
             return $response->withStatus(404);
         }
