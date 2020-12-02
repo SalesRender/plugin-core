@@ -26,7 +26,7 @@ use Slim\App;
 use Slim\Http\Response;
 use Slim\Http\ServerRequest as Request;
 
-class WebAppFactory extends AppFactory
+abstract class WebAppFactory extends AppFactory
 {
 
     protected App $app;

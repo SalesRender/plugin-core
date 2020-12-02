@@ -16,7 +16,7 @@ use Leadvertex\Plugin\Components\Translations\Commands\LangAddCommand;
 use Leadvertex\Plugin\Components\Translations\Commands\LangUpdateCommand;
 use Symfony\Component\Console\Application;
 
-class ConsoleAppFactory extends AppFactory
+abstract class ConsoleAppFactory extends AppFactory
 {
 
     protected Application $app;
