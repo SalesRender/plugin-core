@@ -10,7 +10,6 @@ namespace Leadvertex\Plugin\Core\Actions\Settings;
 
 use Leadvertex\Plugin\Components\Form\FormData;
 use Leadvertex\Plugin\Components\Settings\Settings;
-use Leadvertex\Plugin\Components\Settings\SettingsForm;
 use Leadvertex\Plugin\Core\Actions\ActionInterface;
 use Slim\Http\Response;
 use Slim\Http\ServerRequest;
@@ -20,7 +19,7 @@ class PutSettingsDataAction implements ActionInterface
 
     public function __invoke(ServerRequest $request, Response $response, array $args): Response
     {
-        $form = SettingsForm::getInstance();
+        $form = Settings::getForm();
         $data = new FormData($request->getParsedBody());
 
         $errors = $form->getErrors($data);

@@ -8,7 +8,7 @@
 namespace Leadvertex\Plugin\Core\Actions\Settings;
 
 
-use Leadvertex\Plugin\Components\Settings\SettingsForm;
+use Leadvertex\Plugin\Components\Settings\Settings;
 use Leadvertex\Plugin\Core\Actions\FormAction;
 
 class GetSettingsFormAction extends FormAction
@@ -16,7 +16,7 @@ class GetSettingsFormAction extends FormAction
 
     public function __construct()
     {
-        parent::__construct(SettingsForm::getInstance());
+        parent::__construct(Settings::getForm());
     }
 
 }

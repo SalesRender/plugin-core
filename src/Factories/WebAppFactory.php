@@ -115,6 +115,7 @@ abstract class WebAppFactory extends AppFactory
     protected function createBaseApp(): App
     {
         $app = \Slim\Factory\AppFactory::create();
+        $app->addRoutingMiddleware();
 
         //todo cors
         $errorMiddleware = $app->addErrorMiddleware($_ENV['LV_PLUGIN_DEBUG'] ?? false, true, true);

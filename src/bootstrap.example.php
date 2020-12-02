@@ -13,7 +13,7 @@ use Leadvertex\Plugin\Components\Form\Form;
 use Leadvertex\Plugin\Components\Info\Developer;
 use Leadvertex\Plugin\Components\Info\Info;
 use Leadvertex\Plugin\Components\Info\PluginType;
-use Leadvertex\Plugin\Components\Settings\SettingsForm;
+use Leadvertex\Plugin\Components\Settings\Settings;
 use Leadvertex\Plugin\Components\Translations\Translator;
 use Medoo\Medoo;
 use XAKEPEHOK\Path\Path;
@@ -43,7 +43,7 @@ Info::config(
 );
 
 # 4. Configure settings form
-SettingsForm::config(new SettingsForm());
+Settings::setForm(fn() => new Form());
 
 # 5. Configure form autocompletes (or return null if dont used)
 AutocompleteRegistry::config(function (string $name) {
