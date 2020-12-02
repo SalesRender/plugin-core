@@ -5,7 +5,7 @@
  * @author Timur Kasumov (XAKEPEHOK)
  */
 
-namespace Leadvertex\Plugin\Components\Core\Actions\Batch;
+namespace Leadvertex\Plugin\Core\Actions\Batch;
 
 
 use Leadvertex\Plugin\Components\Access\Token\GraphqlInputToken;

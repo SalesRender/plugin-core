@@ -5,12 +5,12 @@
  * @author Timur Kasumov (XAKEPEHOK)
  */
 
-namespace Leadvertex\Plugin\Components\Core\Actions\Batch;
+namespace Leadvertex\Plugin\Core\Actions\Batch;
 
 
 use Leadvertex\Plugin\Components\Batch\Batch;
 use Leadvertex\Plugin\Components\Batch\BatchFormRegistry;
-use Leadvertex\Plugin\Components\Core\Actions\ActionInterface;
+use Leadvertex\Plugin\Core\Actions\ActionInterface;
 use Slim\Http\Response;
 
 abstract class BatchAction implements ActionInterface

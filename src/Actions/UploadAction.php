@@ -5,11 +5,11 @@
  * @author Timur Kasumov (XAKEPEHOK)
  */
 
-namespace Leadvertex\Plugin\Components\Core\Actions;
+namespace Leadvertex\Plugin\Core\Actions;
 
 
 use Leadvertex\Plugin\Components\Db\Components\Connector;
-use Leadvertex\Plugin\Components\Core\Helpers\PathHelper;
+use Leadvertex\Plugin\Core\Helpers\PathHelper;
 use Ramsey\Uuid\Uuid;
 use Slim\Http\Response;
 use Slim\Http\ServerRequest;

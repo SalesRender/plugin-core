@@ -5,7 +5,7 @@
  * @author Timur Kasumov (XAKEPEHOK)
  */
 
-namespace Leadvertex\Plugin\Components\Core\Actions\Batch;
+namespace Leadvertex\Plugin\Core\Actions\Batch;
 
 
 use Leadvertex\Plugin\Components\Access\Token\GraphqlInputToken;
@@ -13,7 +13,7 @@ use Leadvertex\Plugin\Components\ApiClient\ApiFilterSortPaginate;
 use Leadvertex\Plugin\Components\ApiClient\ApiSort;
 use Leadvertex\Plugin\Components\Batch\Batch;
 use Leadvertex\Plugin\Components\Translations\Translator;
-use Leadvertex\Plugin\Components\Core\Actions\ActionInterface;
+use Leadvertex\Plugin\Core\Actions\ActionInterface;
 use Slim\Http\Response;
 use Slim\Http\ServerRequest;
 

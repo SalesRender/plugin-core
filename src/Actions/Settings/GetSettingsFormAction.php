@@ -5,11 +5,11 @@
  * @author Timur Kasumov (XAKEPEHOK)
  */
 
-namespace Leadvertex\Plugin\Components\Core\Actions\Settings;
+namespace Leadvertex\Plugin\Core\Actions\Settings;
 
 
 use Leadvertex\Plugin\Components\Settings\SettingsForm;
-use Leadvertex\Plugin\Components\Core\Actions\FormAction;
+use Leadvertex\Plugin\Core\Actions\FormAction;
 
 class GetSettingsFormAction extends FormAction
 {

@@ -1,5 +1,5 @@
 {
-  "name": "leadvertex/plugin-component-core",
+  "name": "leadvertex/plugin-core",
   "description": "LeadVertex plugin core component",
   "type": "library",
   "minimum-stability": "stable",
@@ -34,7 +34,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Leadvertex\\Plugin\\Components\\Core\\": "src/"
+      "Leadvertex\\Plugin\\Core\\": "src/"
     }
   }
 }

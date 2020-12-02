@@ -5,22 +5,22 @@
  * @author Timur Kasumov (XAKEPEHOK)
  */
 
-namespace Leadvertex\Plugin\Components\Core\Factories;
+namespace Leadvertex\Plugin\Core\Factories;
 
 
-use Leadvertex\Plugin\Components\Core\Actions\Batch\BatchPrepareAction;
-use Leadvertex\Plugin\Components\Core\Actions\Batch\BatchRunAction;
-use Leadvertex\Plugin\Components\Core\Actions\Batch\GetBatchFormAction;
-use Leadvertex\Plugin\Components\Core\Actions\Batch\PutBatchOptionsAction;
-use Leadvertex\Plugin\Components\Core\Actions\InfoAction;
-use Leadvertex\Plugin\Components\Core\Actions\ProcessAction;
-use Leadvertex\Plugin\Components\Core\Actions\RegistrationAction;
-use Leadvertex\Plugin\Components\Core\Actions\RobotsActions;
-use Leadvertex\Plugin\Components\Core\Actions\Settings\GetSettingsDataAction;
-use Leadvertex\Plugin\Components\Core\Actions\Settings\GetSettingsFormAction;
-use Leadvertex\Plugin\Components\Core\Actions\Settings\PutSettingsDataAction;
-use Leadvertex\Plugin\Components\Core\Actions\UploadAction;
-use Leadvertex\Plugin\Components\Core\Middleware\ProtectedMiddleware;
+use Leadvertex\Plugin\Core\Actions\Batch\BatchPrepareAction;
+use Leadvertex\Plugin\Core\Actions\Batch\BatchRunAction;
+use Leadvertex\Plugin\Core\Actions\Batch\GetBatchFormAction;
+use Leadvertex\Plugin\Core\Actions\Batch\PutBatchOptionsAction;
+use Leadvertex\Plugin\Core\Actions\InfoAction;
+use Leadvertex\Plugin\Core\Actions\ProcessAction;
+use Leadvertex\Plugin\Core\Actions\RegistrationAction;
+use Leadvertex\Plugin\Core\Actions\RobotsActions;
+use Leadvertex\Plugin\Core\Actions\Settings\GetSettingsDataAction;
+use Leadvertex\Plugin\Core\Actions\Settings\GetSettingsFormAction;
+use Leadvertex\Plugin\Core\Actions\Settings\PutSettingsDataAction;
+use Leadvertex\Plugin\Core\Actions\UploadAction;
+use Leadvertex\Plugin\Core\Middleware\ProtectedMiddleware;
 use Psr\Http\Server\RequestHandlerInterface;
 use Slim\App;
 use Slim\Http\Response;
@@ -89,7 +89,7 @@ class WebAppFactory extends AppFactory
 
     public function addCors(string $origin = '*', string $headers = '*'): self
     {
-        $this->app->options('/{routes:.+}', function ($request, $response, $args) {
+        $this->app->options('/{routes:.+}', function ($request, $response) {
             return $response;
         });
 

@@ -5,7 +5,7 @@
  * @author Timur Kasumov (XAKEPEHOK)
  */
 
-namespace Leadvertex\Plugin\Components\Core\Actions;
+namespace Leadvertex\Plugin\Core\Actions;
 
 
 use Leadvertex\Plugin\Components\Info\Info;

@@ -5,7 +5,7 @@
  * @author Timur Kasumov (XAKEPEHOK)
  */
 
-namespace Leadvertex\Plugin\Components\Core\Middleware;
+namespace Leadvertex\Plugin\Core\Middleware;
 
 
 use Exception;

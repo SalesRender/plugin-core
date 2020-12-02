@@ -5,7 +5,7 @@
  * @author Timur Kasumov aka XAKEPEHOK
  */
 
-namespace Leadvertex\Plugin\Components\Core\Helpers;
+namespace Leadvertex\Plugin\Core\Helpers;
 
 
 use XAKEPEHOK\Path\Path;

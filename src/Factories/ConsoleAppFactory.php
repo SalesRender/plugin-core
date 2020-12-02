@@ -5,7 +5,7 @@
  * @author Timur Kasumov (XAKEPEHOK)
  */
 
-namespace Leadvertex\Plugin\Components\Core\Factories;
+namespace Leadvertex\Plugin\Core\Factories;
 
 
 use Leadvertex\Plugin\Components\Batch\Commands\BatchHandleCommand;
