@@ -7,21 +7,21 @@
 
 use Leadvertex\Plugin\Components\Batch\BatchFormRegistry;
 use Leadvertex\Plugin\Components\Db\Components\Connector;
-use Leadvertex\Plugin\Components\Developer\Developer;
 use Leadvertex\Plugin\Components\Form\Components\AutocompleteRegistry;
 use Leadvertex\Plugin\Components\Form\Form;
+use Leadvertex\Plugin\Components\Info\Developer;
+use Leadvertex\Plugin\Components\Info\Info;
+use Leadvertex\Plugin\Components\Info\PluginType;
 use Leadvertex\Plugin\Components\Settings\SettingsForm;
 use Leadvertex\Plugin\Components\Translations\Translator;
 use Medoo\Medoo;
 use XAKEPEHOK\Path\Path;
 
-# 0. Configure environment variable in file .env, that placed into root of app
-/*
-LV_PLUGIN_DEBUG=1
-LV_PLUGIN_PHP_BINARY=php
-LV_PLUGIN_QUEUE_LIMIT=1
-LV_PLUGIN_SELF_URI=http://plugin/
-*/
+# 0. Configure environment variable in .env file, that placed into root of app (preferred), or here
+//$_ENV['LV_PLUGIN_DEBUG'] = 1;
+//$_ENV['LV_PLUGIN_PHP_BINARY'] = 'php';
+//$_ENV['LV_PLUGIN_QUEUE_LIMIT'] = 1;
+//$_ENV['LV_PLUGIN_SELF_URI'] = 'http://plugin/';
 
 # 1. Configure DB
 Connector::config(new Medoo([
@@ -32,19 +32,25 @@ Connector::config(new Medoo([
 # 2. Set plugin default language
 Translator::config('ru_RU');
 
-# 3. Configure info about plugin developer (about you or your company)
-Developer::config(
-    'Tony Stark',
-    'support@starkindustriex.com',
-    'starkindustriex.com',
+# 3. Configure info about plugin
+Info::config(
+    new PluginType(PluginType::MACROS),
+    fn() => Translator::get('plugin', 'Plugin name'),
+    fn() => Translator::get('plugin', 'Plugin markdown description'),
+    [], //For example, it can be https://github.com/leadvertex/plugin-component-purpose for MACROS, or ["country" => "RU"] for LOGISTIC
+    new Developer(
+        'Your (company) name',
+        'support.for.plugin@example.com',
+        'example.com',
+    )
 );
 
 # 4. Configure settings form
 SettingsForm::config(
-    function () { return Translator::get('settings', 'title'); },
-    function () { return Translator::get('settings', 'description'); },
-    function () { return []; },
-    function () { return Translator::get('settings', 'button'); }
+    fn() => Translator::get('settings', 'title'),
+    fn() => Translator::get('settings', 'description'),
+    fn() => [],
+    fn() => Translator::get('settings', 'button'),
 );
 
 # 5. Configure batch forms (if you plugin use batches, or remove this block)
