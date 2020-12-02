@@ -32,8 +32,8 @@ Translator::config('ru_RU');
 # 3. Configure info about plugin
 Info::config(
     new PluginType(PluginType::MACROS),
-    fn() => Translator::get('plugin', 'Plugin name'),
-    fn() => Translator::get('plugin', 'Plugin markdown description'),
+    fn() => Translator::get('info', 'Plugin name'),
+    fn() => Translator::get('info', 'Plugin markdown description'),
     [], //For example, it can be https://github.com/leadvertex/plugin-component-purpose for MACROS, or ["country" => "RU"] for LOGISTIC
     new Developer(
         'Your (company) name',
@@ -43,12 +43,7 @@ Info::config(
 );
 
 # 4. Configure settings form
-SettingsForm::config(
-    fn() => Translator::get('settings', 'title'),
-    fn() => Translator::get('settings', 'description'),
-    fn() => [],
-    fn() => Translator::get('settings', 'button'),
-);
+SettingsForm::config(new SettingsForm());
 
 # 5. Configure form autocompletes (or return null if dont used)
 AutocompleteRegistry::config(function (string $name) {
