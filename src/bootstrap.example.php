@@ -65,4 +65,4 @@ BatchFormRegistry::config(function (int $number) {
 });
 
 # 6.1 Configure batch handler (or remove this block if dont used)
-BatchHandler::config(/*new BatchHandlerInterface()*/);
+BatchHandler::config(fn() => new BatchHandlerInterface());
