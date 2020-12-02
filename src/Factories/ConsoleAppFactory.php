@@ -10,6 +10,7 @@ namespace Leadvertex\Plugin\Core\Factories;
 
 use Leadvertex\Plugin\Components\Batch\Commands\BatchHandleCommand;
 use Leadvertex\Plugin\Components\Batch\Commands\BatchQueueCommand;
+use Leadvertex\Plugin\Components\Db\Commands\CreateTablesCommand;
 use Leadvertex\Plugin\Components\Db\Commands\TableCleanerCommand;
 use Leadvertex\Plugin\Components\DirectoryCleaner\DirectoryCleanerCommand;
 use Leadvertex\Plugin\Components\Translations\Commands\LangAddCommand;
@@ -47,6 +48,7 @@ abstract class ConsoleAppFactory extends AppFactory
 
         $app->add(new DirectoryCleanerCommand());
 
+        $app->add(new CreateTablesCommand());
         $app->add(new TableCleanerCommand());
 
         $app->add(new LangAddCommand());
