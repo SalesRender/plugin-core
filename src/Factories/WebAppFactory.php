@@ -36,8 +36,8 @@ abstract class WebAppFactory extends AppFactory
     public function __construct()
     {
         parent::__construct();
-        $this->app = $this->createBaseApp();
         $this->protected = new ProtectedMiddleware();
+        $this->app = $this->createBaseApp();
     }
 
     public function addUploadAction(): self
