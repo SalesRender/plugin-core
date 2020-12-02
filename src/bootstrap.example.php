@@ -50,7 +50,7 @@ SettingsForm::config(
     fn() => Translator::get('settings', 'button'),
 );
 
-# 5. Configure form autocompletes (if some plugin forms use autocompletes, or remove this block)
+# 5. Configure form autocompletes (or return null if dont used)
 AutocompleteRegistry::config(function (string $name) {
 //    switch ($name) {
 //        case 'status': return new StatusAutocomplete();
@@ -59,7 +59,7 @@ AutocompleteRegistry::config(function (string $name) {
 //    }
 });
 
-# 6. Configure batch forms (if you plugin use batches, or remove this block)
+# 6. Configure batch forms (or return null if dont used)
 BatchFormRegistry::config(function (int $number) {
 //    switch ($number) {
 //        case 1: return new Form();
@@ -69,5 +69,5 @@ BatchFormRegistry::config(function (int $number) {
 //    }
 });
 
-# 6.1 Configure batch handler (if you plugin use batches, or remove this block)
+# 6.1 Configure batch handler (or remove this block if dont used)
 BatchHandler::config(/*new BatchHandlerInterface()*/);
