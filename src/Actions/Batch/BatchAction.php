@@ -28,7 +28,7 @@ abstract class BatchAction implements ActionInterface
             return $response->withStatus(425);
         }
 
-        if ($number > 1 ?? is_null($batch->getOptions($number - 1))) {
+        if ($number > 1 && is_null($batch->getOptions($number - 1))) {
             return $response->withStatus(425);
         }
 
