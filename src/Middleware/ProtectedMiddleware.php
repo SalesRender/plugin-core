@@ -37,6 +37,7 @@ class ProtectedMiddleware
 
         try {
             $token = new GraphqlInputToken($jwt);
+            GraphqlInputToken::setInstance($token);
         } catch (Exception $exception) {
             throw new HttpException($request, $exception->getMessage(), 403);
         }
