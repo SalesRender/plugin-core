@@ -8,6 +8,7 @@
 namespace Leadvertex\Plugin\Core\Factories;
 
 
+use Leadvertex\Plugin\Core\Actions\AutocompleteAction;
 use Leadvertex\Plugin\Core\Actions\Batch\BatchPrepareAction;
 use Leadvertex\Plugin\Core\Actions\Batch\BatchRunAction;
 use Leadvertex\Plugin\Core\Actions\Batch\GetBatchFormAction;
@@ -52,7 +53,7 @@ abstract class WebAppFactory extends AppFactory
     public function addAutocompleteAction(): self
     {
         $this->app
-            ->post('/protected/upload', UploadAction::class)
+            ->post('/protected/autocomplete', AutocompleteAction::class)
             ->add($this->protected);
 
         return $this;
