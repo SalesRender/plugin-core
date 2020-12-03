@@ -14,41 +14,40 @@ use Leadvertex\Plugin\Components\Access\Token\GraphqlInputToken;
 use Leadvertex\Plugin\Components\Db\Components\Connector;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use Slim\Exception\HttpException;
 use Slim\Http\Response;
 use Slim\Http\ServerRequest as Request;
 
 class ProtectedMiddleware
 {
 
+    /**
+     * @param Request $request
+     * @param RequestHandlerInterface $handler
+     * @return ResponseInterface
+     * @throws HttpException
+     */
     public function __invoke(Request $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        $jwt = $request->getHeader('')[0] ?? '';
-
-        /** @var Response $response */
-        $response = $handler->handle($request);
+        $jwt = $request->getHeader('X-PLUGIN-TOKEN')[0] ?? '';
 
         if (empty($jwt)) {
-            return $response->withJson([
-                'error' => 'X-PLUGIN-TOKEN not found'
-            ], 403);
+            throw new HttpException($request, 'X-PLUGIN-TOKEN not found', 403);
         }
 
         try {
             $token = new GraphqlInputToken($jwt);
         } catch (Exception $exception) {
-            return $response->withJson([
-                'error' => $exception->getMessage()
-            ], 403);
+            throw new HttpException($request, $exception->getMessage(), 403);
         }
 
         Connector::setReference($token->getPluginReference());
         if (Registration::find() === null) {
-            return $response->withJson([
-                'error' => 'Plugin was not registered'
-            ], 403);
+            throw new HttpException($request, 'Plugin was not registered', 403);
         }
 
-        return $response;
+        /** @var Response $response */
+        return $handler->handle($request);
     }
 
 }
