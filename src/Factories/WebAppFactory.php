@@ -21,6 +21,7 @@ use Leadvertex\Plugin\Core\Actions\Settings\GetSettingsDataAction;
 use Leadvertex\Plugin\Core\Actions\Settings\GetSettingsFormAction;
 use Leadvertex\Plugin\Core\Actions\Settings\PutSettingsDataAction;
 use Leadvertex\Plugin\Core\Actions\UploadAction;
+use Leadvertex\Plugin\Core\Components\ErrorHandler;
 use Leadvertex\Plugin\Core\Middleware\ProtectedMiddleware;
 use Psr\Http\Server\RequestHandlerInterface;
 use Slim\App;
@@ -105,11 +106,13 @@ abstract class WebAppFactory extends AppFactory
         return $this;
     }
 
-
     public function build(): App
     {
         $app = $this->app;
         $this->app = $this->createBaseApp();
+
+        $errorMiddleware = $app->addErrorMiddleware($_ENV['LV_PLUGIN_DEBUG'] ?? false, true, true);
+        $errorMiddleware->setDefaultErrorHandler(new ErrorHandler($app));
         return $app;
     }
 
@@ -117,11 +120,6 @@ abstract class WebAppFactory extends AppFactory
     {
         $app = \Slim\Factory\AppFactory::create();
         $app->addRoutingMiddleware();
-
-        //todo cors
-        $errorMiddleware = $app->addErrorMiddleware($_ENV['LV_PLUGIN_DEBUG'] ?? false, true, true);
-        $errorHandler = $errorMiddleware->getDefaultErrorHandler();
-        $errorHandler->forceContentType('application/json');
 
         $app->get('/info', InfoAction::class);
         $app->put('/registration', RegistrationAction::class);
