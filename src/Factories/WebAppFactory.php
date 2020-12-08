@@ -8,7 +8,7 @@
 namespace Leadvertex\Plugin\Core\Factories;
 
 
-use Leadvertex\Plugin\Components\Form\Form;
+use Leadvertex\Plugin\Components\Settings\Settings;
 use Leadvertex\Plugin\Core\Actions\ActionInterface;
 use Leadvertex\Plugin\Core\Actions\AutocompleteAction;
 use Leadvertex\Plugin\Core\Actions\Batch\BatchPrepareAction;
@@ -21,7 +21,6 @@ use Leadvertex\Plugin\Core\Actions\ProcessAction;
 use Leadvertex\Plugin\Core\Actions\RegistrationAction;
 use Leadvertex\Plugin\Core\Actions\RobotsActions;
 use Leadvertex\Plugin\Core\Actions\Settings\GetSettingsDataAction;
-use Leadvertex\Plugin\Core\Actions\Settings\GetSettingsFormAction;
 use Leadvertex\Plugin\Core\Actions\Settings\PutSettingsDataAction;
 use Leadvertex\Plugin\Core\Actions\UploadAction;
 use Leadvertex\Plugin\Core\Components\ErrorHandler;
@@ -62,15 +61,12 @@ abstract class WebAppFactory extends AppFactory
 
     public function addSettingsActions(): self
     {
-        if (!$this->registerActions(__METHOD__)) {
-            return $this;
-        }
-
-        $this->app->get('/protected/forms/settings', GetSettingsFormAction::class)->add($this->protected);
-        $this->app->get('/protected/data/settings', GetSettingsDataAction::class)->add($this->protected);
-        $this->app->put('/protected/data/settings', PutSettingsDataAction::class)->add($this->protected);
-
-        $this->addAutocompleteAction();
+        $this->addForm(
+            'settings',
+            fn() => Settings::getForm(),
+            new PutSettingsDataAction(),
+            new GetSettingsDataAction(),
+        );
 
         return $this;
     }
@@ -158,14 +154,20 @@ abstract class WebAppFactory extends AppFactory
         return $app;
     }
 
-    protected function addForm(string $name, Form $form, ActionInterface $handler): self
+    protected function addForm(string $name, callable $form, ActionInterface $put, ?ActionInterface $get = null): self
     {
         if (!$this->registerActions($name)) {
             return $this;
         }
 
         $this->app->get("/protected/forms/{$name}", new FormAction($form))->add($this->protected);
-        $this->app->put("/protected/data/{$name}", $handler)->add($this->protected);
+        $this->app->put("/protected/data/{$name}", $put)->add($this->protected);
+
+        if ($get) {
+            $this->app->get("/protected/data/{$name}", $get)->add($this->protected);
+        }
+
+        $this->addAutocompleteAction();
 
         return $this;
     }

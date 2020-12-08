@@ -8,26 +8,28 @@
 namespace Leadvertex\Plugin\Core\Actions;
 
 
-use Leadvertex\Plugin\Components\Form\Form;
 use Slim\Http\Response;
 use Slim\Http\ServerRequest;
 
 class FormAction implements ActionInterface
 {
 
-    private ?Form $form;
+    /** @var callable */
+    private $form;
 
-    public function __construct(?Form $form)
+    public function __construct(callable $form)
     {
         $this->form = $form;
     }
 
     public function __invoke(ServerRequest $request, Response $response, array $args): Response
     {
-        if (is_null($this->form)) {
+        $form = ($this->form)();
+
+        if (is_null($form)) {
             return $response->withStatus(404);
         }
 
-        return $response->withJson($this->form);
+        return $response->withJson($form);
     }
 }
