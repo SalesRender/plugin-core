@@ -9,7 +9,7 @@ namespace Leadvertex\Plugin\Core\Actions\Batch;
 
 
 use Leadvertex\Plugin\Components\Batch\Batch;
-use Leadvertex\Plugin\Components\Batch\BatchFormRegistry;
+use Leadvertex\Plugin\Components\Batch\BatchContainer;
 use Leadvertex\Plugin\Components\Form\FormData;
 use Slim\Http\Response;
 use Slim\Http\ServerRequest;
@@ -25,7 +25,7 @@ class PutBatchOptionsAction extends BatchAction
             return $error;
         }
 
-        $form = BatchFormRegistry::getForm($number);
+        $form = BatchContainer::getForm($number);
         $data = new FormData($request->getParsedBody());
         $errors = $form->getErrors($data);
         if (!empty($errors)) {

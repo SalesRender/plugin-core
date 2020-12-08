@@ -8,7 +8,7 @@
 namespace Leadvertex\Plugin\Core\Actions\Batch;
 
 
-use Leadvertex\Plugin\Components\Batch\BatchFormRegistry;
+use Leadvertex\Plugin\Components\Batch\BatchContainer;
 use Slim\Http\Response;
 use Slim\Http\ServerRequest;
 
@@ -23,6 +23,6 @@ class GetBatchFormAction extends BatchAction
             return $error;
         }
 
-        return $response->withJson(BatchFormRegistry::getForm($number));
+        return $response->withJson(BatchContainer::getForm($number));
     }
 }

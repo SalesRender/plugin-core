@@ -10,8 +10,7 @@ namespace Leadvertex\Plugin\Core\Actions\Batch;
 
 use Leadvertex\Plugin\Components\Access\Token\GraphqlInputToken;
 use Leadvertex\Plugin\Components\Batch\Batch;
-use Leadvertex\Plugin\Components\Batch\BatchFormRegistry;
-use Leadvertex\Plugin\Components\Batch\BatchHandler;
+use Leadvertex\Plugin\Components\Batch\BatchContainer;
 use Leadvertex\Plugin\Components\Process\Process;
 use Slim\Http\Response;
 use Slim\Http\ServerRequest;
@@ -27,7 +26,7 @@ class BatchRunAction extends BatchAction
             return $response->withStatus(425);
         }
 
-        if (!is_null(BatchFormRegistry::getForm($batch->countOptions() + 1))) {
+        if (!is_null(BatchContainer::getForm($batch->countOptions() + 1))) {
             return $response->withStatus(425);
         }
 
@@ -40,7 +39,7 @@ class BatchRunAction extends BatchAction
             $process->setState(Process::STATE_PROCESSING);
             $process->save();
 
-            BatchHandler::getInstance()($process, $batch);
+            BatchContainer::getHandler()($process, $batch);
         } else {
             $process->save();
         }

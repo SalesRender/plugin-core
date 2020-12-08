@@ -9,7 +9,7 @@ namespace Leadvertex\Plugin\Core\Actions\Batch;
 
 
 use Leadvertex\Plugin\Components\Batch\Batch;
-use Leadvertex\Plugin\Components\Batch\BatchFormRegistry;
+use Leadvertex\Plugin\Components\Batch\BatchContainer;
 use Leadvertex\Plugin\Core\Actions\ActionInterface;
 use Slim\Http\Response;
 
@@ -32,7 +32,7 @@ abstract class BatchAction implements ActionInterface
             return $response->withStatus(425);
         }
 
-        if (is_null(BatchFormRegistry::getForm($number))) {
+        if (is_null(BatchContainer::getForm($number))) {
             return $response->withStatus(404);
         }
 

@@ -5,8 +5,7 @@
  * @author Timur Kasumov (XAKEPEHOK)
  */
 
-use Leadvertex\Plugin\Components\Batch\BatchFormRegistry;
-use Leadvertex\Plugin\Components\Batch\BatchHandler;
+use Leadvertex\Plugin\Components\Batch\BatchContainer;
 use Leadvertex\Plugin\Components\Db\Components\Connector;
 use Leadvertex\Plugin\Components\Form\Components\AutocompleteRegistry;
 use Leadvertex\Plugin\Components\Form\Form;
@@ -54,15 +53,15 @@ AutocompleteRegistry::config(function (string $name) {
 //    }
 });
 
-# 6. Configure batch forms (or return null if dont used)
-BatchFormRegistry::config(function (int $number) {
+# 6. Configure batch forms and handler (or remove this block if dont used)
+BatchContainer::config(
+    function (int $number) {
 //    switch ($number) {
 //        case 1: return new Form();
 //        case 2: return new Form();
 //        case 3: return new Form();
 //        default: return null;
 //    }
-});
-
-# 6.1 Configure batch handler (or remove this block if dont used)
-BatchHandler::config(fn() => new BatchHandlerInterface());
+    },
+    new BatchHandlerInterface()
+);
