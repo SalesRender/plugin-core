@@ -35,15 +35,21 @@ abstract class WebAppFactory extends AppFactory
 
     protected ProtectedMiddleware $protected;
 
+    private array $actions = [];
+
     public function __construct()
     {
         parent::__construct();
         $this->protected = new ProtectedMiddleware();
-        $this->app = $this->createBaseApp();
+        $this->createBaseApp();
     }
 
     public function addUploadAction(): self
     {
+        if ($this->registerActions(__METHOD__)) {
+            return $this;
+        }
+
         $this->app
             ->post('/protected/upload', UploadAction::class)
             ->add($this->protected);
@@ -51,17 +57,27 @@ abstract class WebAppFactory extends AppFactory
         return $this;
     }
 
-    public function addAutocompleteAction(): self
+    public function addSettingsActions(): self
     {
-        $this->app
-            ->post('/protected/autocomplete', AutocompleteAction::class)
-            ->add($this->protected);
+        if ($this->registerActions(__METHOD__)) {
+            return $this;
+        }
+
+        $this->app->get('/protected/forms/settings', GetSettingsFormAction::class)->add($this->protected);
+        $this->app->get('/protected/data/settings', GetSettingsDataAction::class)->add($this->protected);
+        $this->app->put('/protected/data/settings', PutSettingsDataAction::class)->add($this->protected);
+
+        $this->addAutocompleteAction();
 
         return $this;
     }
 
     public function addBatchActions(): self
     {
+        if ($this->registerActions(__METHOD__)) {
+            return $this;
+        }
+
         $this->app
             ->post('/protected/batch/prepare', BatchPrepareAction::class)
             ->add($this->protected);
@@ -79,18 +95,40 @@ abstract class WebAppFactory extends AppFactory
             ->add($this->protected);
 
         $this->addProcessAction();
+        $this->addAutocompleteAction();
+
+        return $this;
+    }
+
+    public function addAutocompleteAction(): self
+    {
+        if ($this->registerActions(__METHOD__)) {
+            return $this;
+        }
+
+        $this->app
+            ->get('/protected/autocomplete/{name}', AutocompleteAction::class)
+            ->add($this->protected);
 
         return $this;
     }
 
     public function addProcessAction(): self
     {
+        if ($this->registerActions(__METHOD__)) {
+            return $this;
+        }
+
         $this->app->get('/process', ProcessAction::class);
         return $this;
     }
 
     public function addCors(string $origin = '*', string $headers = '*'): self
     {
+        if ($this->registerActions(__METHOD__)) {
+            return $this;
+        }
+
         $this->app->options('/{routes:.+}', function ($request, $response) {
             return $response;
         });
@@ -109,32 +147,40 @@ abstract class WebAppFactory extends AppFactory
     public function build(): App
     {
         $app = $this->app;
-        $this->app = $this->createBaseApp();
-
         $errorMiddleware = $app->addErrorMiddleware($_ENV['LV_PLUGIN_DEBUG'] ?? false, true, true);
         $errorMiddleware->setDefaultErrorHandler(new ErrorHandler($app));
+
+        $this->createBaseApp();
+
         return $app;
     }
 
     protected function createBaseApp(): App
     {
-        $app = \Slim\Factory\AppFactory::create();
-        $app->addRoutingMiddleware();
+        $this->app = \Slim\Factory\AppFactory::create();
+        $this->app->addRoutingMiddleware();
 
-        $app->get('/info', InfoAction::class);
-        $app->put('/registration', RegistrationAction::class);
+        $this->app->get('/info', InfoAction::class);
+        $this->app->put('/registration', RegistrationAction::class);
+        $this->app->get('/robots.txt', RobotsActions::class);
 
-        $app->get('/protected/forms/settings', GetSettingsFormAction::class)->add($this->protected);
-        $app->get('/protected/data/settings', GetSettingsDataAction::class)->add($this->protected);
-        $app->put('/protected/data/settings', PutSettingsDataAction::class)->add($this->protected);
+        $this->addSettingsActions();
 
-        $app->get('/robots.txt', RobotsActions::class);
-
-        $app->setBasePath((function () {
+        $this->app->setBasePath((function () {
             return rtrim(parse_url($_ENV['LV_PLUGIN_SELF_URI'], PHP_URL_PATH), '/');
         })());
 
-        return $app;
+        return $this->app;
+    }
+
+    private function registerActions(string $identity): bool
+    {
+        if (isset($this->actions[$identity])) {
+            return false;
+        }
+
+        $this->actions[$identity] = true;
+        return true;
     }
 
 }
