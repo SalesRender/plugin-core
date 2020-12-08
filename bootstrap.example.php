@@ -44,7 +44,7 @@ Info::config(
 # 4. Configure settings form
 Settings::setForm(fn() => new Form());
 
-# 5. Configure form autocompletes (or return null if dont used)
+# 5. Configure form autocompletes (or remove this block if dont used)
 AutocompleteRegistry::config(function (string $name) {
 //    switch ($name) {
 //        case 'status': return new StatusAutocomplete();

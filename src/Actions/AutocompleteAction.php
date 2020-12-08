@@ -9,6 +9,7 @@ namespace Leadvertex\Plugin\Core\Actions;
 
 
 use Leadvertex\Plugin\Components\Form\Components\AutocompleteRegistry;
+use Leadvertex\Plugin\Components\Form\Exceptions\AutocompleteRegistryException;
 use Slim\Http\Response;
 use Slim\Http\ServerRequest;
 
@@ -18,7 +19,12 @@ class AutocompleteAction implements ActionInterface
 
     public function __invoke(ServerRequest $request, Response $response, array $args): Response
     {
-        $autocomplete = AutocompleteRegistry::getAutocomplete($args['name']);
+        try {
+            $autocomplete = AutocompleteRegistry::getAutocomplete($args['name']);
+        } catch (AutocompleteRegistryException $exception) {
+            return $response->withStatus(404);
+        }
+
         if (is_null($autocomplete)) {
             return $response->withStatus(404);
         }
