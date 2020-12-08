@@ -46,7 +46,7 @@ abstract class WebAppFactory extends AppFactory
 
     public function addUploadAction(): self
     {
-        if ($this->registerActions(__METHOD__)) {
+        if (!$this->registerActions(__METHOD__)) {
             return $this;
         }
 
@@ -59,7 +59,7 @@ abstract class WebAppFactory extends AppFactory
 
     public function addSettingsActions(): self
     {
-        if ($this->registerActions(__METHOD__)) {
+        if (!$this->registerActions(__METHOD__)) {
             return $this;
         }
 
@@ -74,7 +74,7 @@ abstract class WebAppFactory extends AppFactory
 
     public function addBatchActions(): self
     {
-        if ($this->registerActions(__METHOD__)) {
+        if (!$this->registerActions(__METHOD__)) {
             return $this;
         }
 
@@ -102,7 +102,7 @@ abstract class WebAppFactory extends AppFactory
 
     public function addAutocompleteAction(): self
     {
-        if ($this->registerActions(__METHOD__)) {
+        if (!$this->registerActions(__METHOD__)) {
             return $this;
         }
 
@@ -115,7 +115,7 @@ abstract class WebAppFactory extends AppFactory
 
     public function addProcessAction(): self
     {
-        if ($this->registerActions(__METHOD__)) {
+        if (!$this->registerActions(__METHOD__)) {
             return $this;
         }
 
@@ -125,7 +125,7 @@ abstract class WebAppFactory extends AppFactory
 
     public function addCors(string $origin = '*', string $headers = '*'): self
     {
-        if ($this->registerActions(__METHOD__)) {
+        if (!$this->registerActions(__METHOD__)) {
             return $this;
         }
 
