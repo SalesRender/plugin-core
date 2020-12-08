@@ -8,11 +8,14 @@
 namespace Leadvertex\Plugin\Core\Factories;
 
 
+use Leadvertex\Plugin\Components\Form\Form;
+use Leadvertex\Plugin\Core\Actions\ActionInterface;
 use Leadvertex\Plugin\Core\Actions\AutocompleteAction;
 use Leadvertex\Plugin\Core\Actions\Batch\BatchPrepareAction;
 use Leadvertex\Plugin\Core\Actions\Batch\BatchRunAction;
 use Leadvertex\Plugin\Core\Actions\Batch\GetBatchFormAction;
 use Leadvertex\Plugin\Core\Actions\Batch\PutBatchOptionsAction;
+use Leadvertex\Plugin\Core\Actions\FormAction;
 use Leadvertex\Plugin\Core\Actions\InfoAction;
 use Leadvertex\Plugin\Core\Actions\ProcessAction;
 use Leadvertex\Plugin\Core\Actions\RegistrationAction;
@@ -153,6 +156,18 @@ abstract class WebAppFactory extends AppFactory
         $this->createBaseApp();
 
         return $app;
+    }
+
+    protected function addForm(string $name, Form $form, ActionInterface $handler): self
+    {
+        if (!$this->registerActions($name)) {
+            return $this;
+        }
+
+        $this->app->get("/protected/forms/{$name}", new FormAction($form))->add($this->protected);
+        $this->app->put("/protected/data/{$name}", $handler)->add($this->protected);
+
+        return $this;
     }
 
     protected function createBaseApp(): App
