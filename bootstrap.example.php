@@ -14,6 +14,7 @@ use Leadvertex\Plugin\Components\Info\Info;
 use Leadvertex\Plugin\Components\Info\PluginType;
 use Leadvertex\Plugin\Components\Settings\Settings;
 use Leadvertex\Plugin\Components\Translations\Translator;
+use Leadvertex\Plugin\Core\Actions\UploadAction;
 use Medoo\Medoo;
 use XAKEPEHOK\Path\Path;
 
@@ -28,7 +29,13 @@ Connector::config(new Medoo([
 # 2. Set plugin default language
 Translator::config('ru_RU');
 
-# 3. Configure info about plugin
+# 3. Set permitted file extensions and max sizes (in bytes). Pass empty array for disable file uploading
+UploadAction::config([
+    'jpg' => 100 * 1024,       //Max 100 KB for *.jpg file
+    'zip' => 10 * 1024 * 1024, //Max 10 MB for *.zip archive
+]);
+
+# 4. Configure info about plugin
 Info::config(
     new PluginType(PluginType::MACROS),
     fn() => Translator::get('info', 'Plugin name'),
@@ -41,10 +48,10 @@ Info::config(
     )
 );
 
-# 4. Configure settings form
+# 5. Configure settings form
 Settings::setForm(fn() => new Form());
 
-# 5. Configure form autocompletes (or remove this block if dont used)
+# 6. Configure form autocompletes (or remove this block if dont used)
 AutocompleteRegistry::config(function (string $name) {
 //    switch ($name) {
 //        case 'status': return new StatusAutocomplete();
@@ -53,7 +60,7 @@ AutocompleteRegistry::config(function (string $name) {
 //    }
 });
 
-# 6. Configure batch forms and handler (or remove this block if dont used)
+# 7. Configure batch forms and handler (or remove this block if dont used)
 BatchContainer::config(
     function (int $number) {
 //    switch ($number) {

@@ -182,6 +182,7 @@ abstract class WebAppFactory extends AppFactory
         $this->app->get('/robots.txt', RobotsActions::class);
 
         $this->addSettingsActions();
+        $this->addUploadAction();
 
         $this->app->setBasePath((function () {
             return rtrim(parse_url($_ENV['LV_PLUGIN_SELF_URI'], PHP_URL_PATH), '/');
