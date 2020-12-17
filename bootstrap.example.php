@@ -29,7 +29,7 @@ Connector::config(new Medoo([
 # 2. Set plugin default language
 Translator::config('ru_RU');
 
-# 3. Set permitted file extensions and max sizes (in bytes). Pass empty array for disable file uploading
+# 3. Set permitted file extensions (* for any ext) and max sizes (in bytes). Pass empty array for disable file uploading
 UploadAction::config([
     'jpg' => 100 * 1024,       //Max 100 KB for *.jpg file
     'zip' => 10 * 1024 * 1024, //Max 10 MB for *.zip archive

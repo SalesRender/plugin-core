@@ -45,7 +45,7 @@ class UploadAction implements ActionInterface
             return $response->withStatus(403);
         }
 
-        if (!isset(static::$permissions[$ext])) {
+        if (!isset(static::$permissions[$ext]) && !isset(static::$permissions['*'])) {
             return $response->withJson(
                 [
                     'code' => 406,
@@ -56,7 +56,8 @@ class UploadAction implements ActionInterface
             );
         }
 
-        if ($file->getSize() > static::$permissions[$ext]) {
+        $maxSize = static::$permissions[$ext] ?? static::$permissions['*'];
+        if ($file->getSize() > $maxSize) {
             return $response->withJson(
                 [
                     'code' => 406,
