@@ -135,10 +135,7 @@ abstract class WebAppFactory extends AppFactory
         $this->app->add(function (Request $request, RequestHandlerInterface $handler) use ($origin, $headers) {
             /** @var Response $response */
             $response = $handler->handle($request);
-            return $response
-                ->withHeader('Access-Control-Allow-Origin', $origin)
-                ->withHeader('Access-Control-Allow-Headers', $headers)
-                ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, OPTIONS');
+            return $this->addCorsHeaders($response, $origin, $headers);
         });
         return $this;
     }
@@ -147,11 +144,24 @@ abstract class WebAppFactory extends AppFactory
     {
         $app = $this->app;
         $errorMiddleware = $app->addErrorMiddleware($_ENV['LV_PLUGIN_DEBUG'] ?? false, true, true);
-        $errorMiddleware->setDefaultErrorHandler(new ErrorHandler($app));
+
+        /** @var Response $response */
+        $response = $app->getResponseFactory()->createResponse();
+        $handler = new ErrorHandler($this->addCorsHeaders($response));
+
+        $errorMiddleware->setDefaultErrorHandler($handler);
 
         $this->createBaseApp();
 
         return $app;
+    }
+
+    protected function addCorsHeaders(Response $response, string $origin = '*', string $headers = '*'): Response
+    {
+        return $response
+            ->withHeader('Access-Control-Allow-Origin', $origin)
+            ->withHeader('Access-Control-Allow-Headers', $headers)
+            ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, OPTIONS');
     }
 
     protected function addForm(string $name, callable $form, ActionInterface $put, ?ActionInterface $get = null): self

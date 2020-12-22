@@ -11,7 +11,6 @@ namespace Leadvertex\Plugin\Core\Components;
 use Leadvertex\Plugin\Components\Settings\Exceptions\IntegritySettingsException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Slim\App;
 use Slim\Exception\HttpException;
 use Slim\Http\Response;
 use Slim\Interfaces\ErrorHandlerInterface;
@@ -19,15 +18,14 @@ use Throwable;
 
 class ErrorHandler implements ErrorHandlerInterface
 {
-
-    private App $app;
+    private Response $response;
 
     /** @var callable */
     private static $onErrorHandler;
 
-    public function __construct(App $app)
+    public function __construct(Response $response)
     {
-        $this->app = $app;
+        $this->response = $response;
     }
 
     public function __invoke(
@@ -42,8 +40,7 @@ class ErrorHandler implements ErrorHandlerInterface
             (static::$onErrorHandler)($exception, $request);
         }
 
-        /** @var Response $response */
-        $response = $this->app->getResponseFactory()->createResponse();
+        $response = $this->response;
 
         if ($exception instanceof IntegritySettingsException) {
             return $response->withJson(
