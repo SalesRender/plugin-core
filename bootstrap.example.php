@@ -7,7 +7,7 @@
 
 use Leadvertex\Plugin\Components\Batch\BatchContainer;
 use Leadvertex\Plugin\Components\Db\Components\Connector;
-use Leadvertex\Plugin\Components\Form\Components\AutocompleteRegistry;
+use Leadvertex\Plugin\Components\Form\Autocomplete\AutocompleteRegistry;
 use Leadvertex\Plugin\Components\Form\Form;
 use Leadvertex\Plugin\Components\Info\Developer;
 use Leadvertex\Plugin\Components\Info\Info;
