@@ -9,16 +9,17 @@ namespace Leadvertex\Plugin\Core\Actions\Settings;
 
 
 use Leadvertex\Plugin\Components\Settings\Settings;
-use Leadvertex\Plugin\Core\Actions\ActionInterface;
-use Slim\Http\Response;
-use Slim\Http\ServerRequest;
+use Leadvertex\Plugin\Core\Actions\FormDataAction;
 
-class GetSettingsDataAction implements ActionInterface
+class GetSettingsDataAction extends FormDataAction
 {
 
-    public function __invoke(ServerRequest $request, Response $response, array $args): Response
+    public function __construct()
     {
-        return $response->withJson(Settings::find()->getData());
+        parent::__construct(
+            fn() => Settings::getForm(),
+            fn() => Settings::find()->getData()
+        );
     }
 
 }
