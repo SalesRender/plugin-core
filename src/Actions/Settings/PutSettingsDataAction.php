@@ -24,6 +24,7 @@ class PutSettingsDataAction implements ActionInterface
 
         $oldData = Settings::find()->getData();
         $newData = new FormData($request->getParsedBody());
+        $responseData = new FormData($request->getParsedBody());
 
         foreach ($form->getGroups() as $groupName => $group) {
             foreach ($group->getFields() as $fieldName => $field) {
@@ -32,11 +33,13 @@ class PutSettingsDataAction implements ActionInterface
                 }
 
                 $path = "{$groupName}.{$fieldName}";
-                $isUnchanged = $newData->has($path) === false;
 
+                $isUnchanged = $newData->has($path) === false;
                 if ($isUnchanged) {
                     $newData->set($path, $oldData->get($path));
                 }
+
+                $responseData->set($path, $newData->get($path) != '');
             }
         }
 
@@ -49,7 +52,7 @@ class PutSettingsDataAction implements ActionInterface
         $settings->setData($newData);
         $settings->save();
 
-        return $response->withJson(Settings::find()->getData());
+        return $response->withJson($responseData);
     }
 
 }
