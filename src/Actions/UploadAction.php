@@ -48,11 +48,11 @@ class UploadAction implements ActionInterface
         if (!isset(static::$permissions[$ext]) && !isset(static::$permissions['*'])) {
             return $response->withJson(
                 [
-                    'code' => 406,
+                    'code' => 415,
                     'message' => "Files with *.{$ext} can not be uploaded",
                     'permissions' => static::$permissions,
                 ],
-                406
+                415
             );
         }
 
@@ -60,11 +60,11 @@ class UploadAction implements ActionInterface
         if ($file->getSize() > $maxSize) {
             return $response->withJson(
                 [
-                    'code' => 406,
+                    'code' => 413,
                     'message' => "Files too big and can not be uploaded",
                     'permissions' => static::$permissions,
                 ],
-                406
+                413
             );
         }
 
