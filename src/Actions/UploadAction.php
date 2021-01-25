@@ -40,7 +40,7 @@ class UploadAction implements ActionInterface
             return $response->withStatus(400);
         }
 
-        $ext = pathinfo($file->getClientFilename(), PATHINFO_EXTENSION);
+        $ext = strtolower(pathinfo($file->getClientFilename(), PATHINFO_EXTENSION));
         if (empty($ext)) {
             return $response->withStatus(403);
         }
@@ -90,7 +90,9 @@ class UploadAction implements ActionInterface
 
     public static function config(array $permissions): void
     {
-        static::$permissions = $permissions;
+        foreach ($permissions as $ext => $size) {
+            static::$permissions[strtolower($ext)] = $size;
+        }
     }
 
 }
