@@ -32,7 +32,7 @@ class ProtectedMiddleware
         $jwt = $request->getHeader('X-PLUGIN-TOKEN')[0] ?? '';
 
         if (empty($jwt)) {
-            throw new HttpException($request, 'X-PLUGIN-TOKEN not found', 403);
+            throw new HttpException($request, 'X-PLUGIN-TOKEN not found', 401);
         }
 
         try {
