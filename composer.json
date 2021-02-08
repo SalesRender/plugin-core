@@ -29,7 +29,7 @@
     "leadvertex/plugin-component-translations": "^0.1.1",
     "leadvertex/plugin-component-directory-cleaner": "^0.1.0",
     "leadvertex/plugin-component-settings": "^0.2.0",
-    "leadvertex/plugin-component-batch": "^0.2.0"
+    "leadvertex/plugin-component-batch": "^0.3.0"
   },
   "autoload": {
     "psr-4": {
