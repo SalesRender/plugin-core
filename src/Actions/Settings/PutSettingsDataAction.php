@@ -48,6 +48,10 @@ class PutSettingsDataAction implements ActionInterface
             return $response->withJson($errors, 400);
         }
 
+        //Prevent store redundant data in settings, which was received from end-user
+        $newData = $form->clearRedundant($newData);
+        $responseData = $form->clearRedundant($responseData);
+
         $settings = Settings::find();
         $settings->setData($newData);
         $settings->save();
