@@ -38,7 +38,8 @@ class BatchPrepareAction implements ActionInterface
         $batch = new Batch(
             GraphqlInputToken::getInstance(),
             new ApiFilterSortPaginate($filters, $sort, 100),
-            Translator::getLang()
+            Translator::getLang(),
+            $request->getParam('arguments', [])
         );
         $batch->save();
 
