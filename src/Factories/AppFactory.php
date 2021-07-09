@@ -11,6 +11,15 @@ abstract class AppFactory
 
     public function __construct()
     {
+        $this->loadEnv();
+        $_ENV['LV_PLUGIN_SELF_URI'] = rtrim($_ENV['LV_PLUGIN_SELF_URI'], '/') . '/';
+
+        $bootstrap = Path::root()->down('bootstrap.php');
+        include_once $bootstrap;
+    }
+
+    protected function loadEnv(): Dotenv
+    {
         $repository = RepositoryBuilder::create()
             ->withReaders([new EnvConstAdapter()])
             ->withWriters([new EnvConstAdapter()])
@@ -24,11 +33,7 @@ abstract class AppFactory
         $env->required('LV_PLUGIN_DEBUG')->isBoolean();
         $env->required('LV_PLUGIN_QUEUE_LIMIT')->notEmpty()->isInteger();
         $env->required('LV_PLUGIN_SELF_URI')->notEmpty();
-
-        $_ENV['LV_PLUGIN_SELF_URI'] = rtrim($_ENV['LV_PLUGIN_SELF_URI'], '/') . '/';
-
-        $bootstrap = Path::root()->down('bootstrap.php');
-        include_once $bootstrap;
+        return $env;
     }
 
     abstract protected function createBaseApp();
