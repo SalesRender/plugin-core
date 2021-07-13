@@ -35,7 +35,7 @@ class PutBatchOptionsAction extends BatchAction
         /** @var Batch $batch */
         $batch = Batch::find();
         $batch->setOptions($number, $data);
-        $batch->save();;
+        $batch->save();
 
         return $response->withJson($data);
     }
