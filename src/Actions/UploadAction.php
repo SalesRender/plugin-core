@@ -42,7 +42,14 @@ class UploadAction implements ActionInterface
 
         $ext = strtolower(pathinfo($file->getClientFilename(), PATHINFO_EXTENSION));
         if (empty($ext)) {
-            return $response->withStatus(403);
+            return $response->withJson(
+                [
+                    'code' => 403,
+                    'message' => "Files without extension can not be uploaded",
+                    'permissions' => static::$permissions,
+                ],
+                403
+            );
         }
 
         if (!isset(static::$permissions[$ext]) && !isset(static::$permissions['*'])) {
