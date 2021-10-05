@@ -22,6 +22,7 @@ use Leadvertex\Plugin\Core\Actions\RegistrationAction;
 use Leadvertex\Plugin\Core\Actions\RobotsActions;
 use Leadvertex\Plugin\Core\Actions\Settings\GetSettingsDataAction;
 use Leadvertex\Plugin\Core\Actions\Settings\PutSettingsDataAction;
+use Leadvertex\Plugin\Core\Actions\SpecialRequestAction;
 use Leadvertex\Plugin\Core\Actions\UploadAction;
 use Leadvertex\Plugin\Core\Components\ErrorHandler;
 use Leadvertex\Plugin\Core\Middleware\ProtectedMiddleware;
@@ -119,6 +120,17 @@ abstract class WebAppFactory extends AppFactory
         }
 
         $this->app->get('/process', ProcessAction::class);
+        return $this;
+    }
+
+    public function addSpecialRequestAction(SpecialRequestAction $action): self
+    {
+        if (!$this->registerActions(__METHOD__ . '::' . $action->getName())) {
+            return $this;
+        }
+
+        $this->app->post("/special/{$action->getName()}", $action);
+
         return $this;
     }
 
