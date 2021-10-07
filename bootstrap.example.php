@@ -14,7 +14,8 @@ use Leadvertex\Plugin\Components\Info\Info;
 use Leadvertex\Plugin\Components\Info\PluginType;
 use Leadvertex\Plugin\Components\Settings\Settings;
 use Leadvertex\Plugin\Components\Translations\Translator;
-use Leadvertex\Plugin\Core\Actions\UploadAction;
+use Leadvertex\Plugin\Core\Actions\Upload\LocalUploadAction;
+use Leadvertex\Plugin\Core\Actions\Upload\UploadersContainer;
 use Medoo\Medoo;
 use XAKEPEHOK\Path\Path;
 
@@ -30,10 +31,10 @@ Connector::config(new Medoo([
 Translator::config('ru_RU');
 
 # 3. Set permitted file extensions (* for any ext) and max sizes (in bytes). Pass empty array for disable file uploading
-UploadAction::config([
+UploadersContainer::addDefaultUploader(new LocalUploadAction([
     'jpg' => 100 * 1024,       //Max 100 KB for *.jpg file
     'zip' => 10 * 1024 * 1024, //Max 10 MB for *.zip archive
-]);
+]));
 
 # 4. Configure info about plugin
 Info::config(

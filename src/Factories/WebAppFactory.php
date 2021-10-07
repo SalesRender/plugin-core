@@ -23,7 +23,7 @@ use Leadvertex\Plugin\Core\Actions\RobotsActions;
 use Leadvertex\Plugin\Core\Actions\Settings\GetSettingsDataAction;
 use Leadvertex\Plugin\Core\Actions\Settings\PutSettingsDataAction;
 use Leadvertex\Plugin\Core\Actions\SpecialRequestAction;
-use Leadvertex\Plugin\Core\Actions\UploadAction;
+use Leadvertex\Plugin\Core\Actions\Upload\UploadersContainer;
 use Leadvertex\Plugin\Core\Components\ErrorHandler;
 use Leadvertex\Plugin\Core\Middleware\ProtectedMiddleware;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -45,19 +45,6 @@ abstract class WebAppFactory extends AppFactory
         parent::__construct();
         $this->protected = new ProtectedMiddleware();
         $this->createBaseApp();
-    }
-
-    public function addUploadAction(): self
-    {
-        if (!$this->registerActions(__METHOD__)) {
-            return $this;
-        }
-
-        $this->app
-            ->post('/protected/upload', UploadAction::class)
-            ->add($this->protected);
-
-        return $this;
     }
 
     public function addSettingsActions(): self
@@ -168,6 +155,26 @@ abstract class WebAppFactory extends AppFactory
         return $app;
     }
 
+    protected function addUploaders(): self
+    {
+        if (!$this->registerActions(__METHOD__)) {
+            return $this;
+        }
+
+        $uploaders = UploadersContainer::getUploaders();
+        if (empty($uploaders)) {
+            return $this;
+        }
+
+        foreach ($uploaders as $name => $action) {
+            $this->app
+                ->post("/protected/upload" . $name, $action)
+                ->add($this->protected);
+        }
+
+        return $this;
+    }
+
     protected function addCorsHeaders(Response $response, string $origin = '*', string $headers = '*'): Response
     {
         return $response
@@ -204,7 +211,7 @@ abstract class WebAppFactory extends AppFactory
         $this->app->get('/robots.txt', RobotsActions::class);
 
         $this->addSettingsActions();
-        $this->addUploadAction();
+        $this->addUploaders();
 
         $this->app->setBasePath((function () {
             return rtrim(parse_url($_ENV['LV_PLUGIN_SELF_URI'], PHP_URL_PATH), '/');

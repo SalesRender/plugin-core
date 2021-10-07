@@ -5,25 +5,33 @@
  * @author Timur Kasumov (XAKEPEHOK)
  */
 
-namespace Leadvertex\Plugin\Core\Actions;
+namespace Leadvertex\Plugin\Core\Actions\Upload;
 
 
-use Leadvertex\Plugin\Components\Db\Components\Connector;
-use Leadvertex\Plugin\Core\Helpers\PathHelper;
-use Ramsey\Uuid\Uuid;
+use Leadvertex\Plugin\Core\Actions\ActionInterface;
 use Slim\Http\Response;
 use Slim\Http\ServerRequest;
 use Slim\Psr7\UploadedFile;
-use XAKEPEHOK\Path\Path;
 
-class UploadAction implements ActionInterface
+abstract class UploadAction implements ActionInterface
 {
 
-    protected static array $permissions = [];
+    protected array $permissions = [];
+
+    protected Response $response;
+
+    public function __construct(array $permissions)
+    {
+        foreach ($permissions as $ext => $size) {
+            $this->permissions[strtolower($ext)] = $size;
+        }
+    }
 
     public function __invoke(ServerRequest $request, Response $response, array $args): Response
     {
-        if (empty(static::$permissions)) {
+        $this->response = $response;
+
+        if (empty($this->permissions)) {
             return $response->withJson(
                 [
                     'code' => 405,
@@ -46,60 +54,38 @@ class UploadAction implements ActionInterface
                 [
                     'code' => 403,
                     'message' => "Files without extension can not be uploaded",
-                    'permissions' => static::$permissions,
+                    'permissions' => $this->permissions,
                 ],
                 403
             );
         }
 
-        if (!isset(static::$permissions[$ext]) && !isset(static::$permissions['*'])) {
+        if (!isset($this->permissions[$ext]) && !isset($this->permissions['*'])) {
             return $response->withJson(
                 [
                     'code' => 415,
                     'message' => "Files with *.{$ext} can not be uploaded",
-                    'permissions' => static::$permissions,
+                    'permissions' => $this->permissions,
                 ],
                 415
             );
         }
 
-        $maxSize = static::$permissions[$ext] ?? static::$permissions['*'];
+        $maxSize = $this->permissions[$ext] ?? $this->permissions['*'];
         if ($file->getSize() > $maxSize) {
             return $response->withJson(
                 [
                     'code' => 413,
                     'message' => "Files too big and can not be uploaded",
-                    'permissions' => static::$permissions,
+                    'permissions' => $this->permissions,
                 ],
                 413
             );
         }
 
-        $relative = (new Path('/'))
-            ->down(Connector::getReference()->getCompanyId())
-            ->down(Connector::getReference()->getId())
-            ->down(Uuid::uuid4()->toString() . '.' . $ext);
-
-        $pathOnDisk = PathHelper::getPublicUpload()->down($relative);
-
-        $directory = $pathOnDisk->up();
-        if (!is_dir((string) $directory)) {
-            mkdir((string) $directory, 0755, true);
-        }
-
-        $file->moveTo((string) $pathOnDisk);
-
-        $uriPath = (new Path($_ENV['LV_PLUGIN_SELF_URI']))->down('uploaded')->down($relative);
-        return $response->withJson([
-            'uri' => (string) $uriPath,
-        ]);
+        return $this->handler($file);
     }
 
-    public static function config(array $permissions): void
-    {
-        foreach ($permissions as $ext => $size) {
-            static::$permissions[strtolower($ext)] = $size;
-        }
-    }
+    abstract protected function handler(UploadedFile $file): Response;
 
 }
