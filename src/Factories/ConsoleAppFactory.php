@@ -13,6 +13,8 @@ use Leadvertex\Plugin\Components\Batch\Commands\BatchQueueCommand;
 use Leadvertex\Plugin\Components\Db\Commands\CreateTablesCommand;
 use Leadvertex\Plugin\Components\Db\Commands\TableCleanerCommand;
 use Leadvertex\Plugin\Components\DirectoryCleaner\DirectoryCleanerCommand;
+use Leadvertex\Plugin\Components\SpecialRequestDispatcher\Commands\SpecialRequestQueueCommand;
+use Leadvertex\Plugin\Components\SpecialRequestDispatcher\Commands\SpecialRequestHandleCommand;
 use Leadvertex\Plugin\Components\Translations\Commands\LangAddCommand;
 use Leadvertex\Plugin\Components\Translations\Commands\LangUpdateCommand;
 use Symfony\Component\Console\Application;
@@ -53,6 +55,9 @@ abstract class ConsoleAppFactory extends AppFactory
 
         $app->add(new LangAddCommand());
         $app->add(new LangUpdateCommand());
+
+        $app->add(new SpecialRequestQueueCommand());
+        $app->add(new SpecialRequestHandleCommand());
 
         return $app;
     }
