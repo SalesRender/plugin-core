@@ -22,13 +22,12 @@
     "adbario/php-dot-notation": "^2.2",
     "leadvertex/plugin-component-form": "^0.10.0",
     "leadvertex/plugin-component-info": "^0.1.1",
-    "leadvertex/plugin-component-process": "^0.4.3",
     "leadvertex/plugin-component-api-client": "^0.6.0",
     "leadvertex/plugin-component-translations": "^0.1.1",
     "leadvertex/plugin-component-directory-cleaner": "^0.1.0",
     "leadvertex/plugin-component-settings": "^0.2.0",
     "leadvertex/plugin-component-batch": "^0.3.0",
-    "leadvertex/plugin-component-request-dispatcher": "^0.2.1",
+    "leadvertex/plugin-component-request-dispatcher": "^0.3.0",
     "xakepehok/path": "^0.2.1"
   },
   "autoload": {
