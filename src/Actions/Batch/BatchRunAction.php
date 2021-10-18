@@ -11,7 +11,7 @@ namespace Leadvertex\Plugin\Core\Actions\Batch;
 use Leadvertex\Plugin\Components\Access\Token\GraphqlInputToken;
 use Leadvertex\Plugin\Components\Batch\Batch;
 use Leadvertex\Plugin\Components\Batch\BatchContainer;
-use Leadvertex\Plugin\Components\Process\Process;
+use Leadvertex\Plugin\Components\Batch\Process\Process;
 use Slim\Http\Response;
 use Slim\Http\ServerRequest;
 

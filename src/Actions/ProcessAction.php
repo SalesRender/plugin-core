@@ -8,7 +8,7 @@
 namespace Leadvertex\Plugin\Core\Actions;
 
 
-use Leadvertex\Plugin\Components\Process\Process;
+use Leadvertex\Plugin\Components\Batch\Process\Process;
 use Slim\Http\Response;
 use Slim\Http\ServerRequest;
 
