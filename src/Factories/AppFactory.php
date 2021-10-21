@@ -33,6 +33,9 @@ abstract class AppFactory
         $env->required('LV_PLUGIN_DEBUG')->isBoolean();
         $env->required('LV_PLUGIN_QUEUE_LIMIT')->notEmpty()->isInteger();
         $env->required('LV_PLUGIN_SELF_URI')->notEmpty();
+
+        error_reporting($_ENV['LV_PLUGIN_DEBUG'] ? E_ALL : 0);
+
         return $env;
     }
 
