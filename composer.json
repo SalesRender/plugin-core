@@ -28,7 +28,8 @@
     "leadvertex/plugin-component-settings": "^0.2.0",
     "leadvertex/plugin-component-batch": "^0.3.0",
     "leadvertex/plugin-component-request-dispatcher": "^0.3.0",
-    "xakepehok/path": "^0.2.1"
+    "xakepehok/path": "^0.2.1",
+    "dragonmantank/cron-expression": "^3.1"
   },
   "autoload": {
     "psr-4": {

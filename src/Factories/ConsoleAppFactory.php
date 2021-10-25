@@ -17,6 +17,7 @@ use Leadvertex\Plugin\Components\SpecialRequestDispatcher\Commands\SpecialReques
 use Leadvertex\Plugin\Components\SpecialRequestDispatcher\Commands\SpecialRequestHandleCommand;
 use Leadvertex\Plugin\Components\Translations\Commands\LangAddCommand;
 use Leadvertex\Plugin\Components\Translations\Commands\LangUpdateCommand;
+use Leadvertex\Plugin\Core\Commands\CronCommand;
 use Symfony\Component\Console\Application;
 
 abstract class ConsoleAppFactory extends AppFactory
@@ -58,6 +59,8 @@ abstract class ConsoleAppFactory extends AppFactory
 
         $app->add(new SpecialRequestQueueCommand());
         $app->add(new SpecialRequestHandleCommand());
+
+        $app->add(new CronCommand());
 
         return $app;
     }
