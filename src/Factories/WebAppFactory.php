@@ -25,6 +25,7 @@ use Leadvertex\Plugin\Core\Actions\Settings\PutSettingsDataAction;
 use Leadvertex\Plugin\Core\Actions\SpecialRequestAction;
 use Leadvertex\Plugin\Core\Actions\Upload\UploadersContainer;
 use Leadvertex\Plugin\Core\Components\ErrorHandler;
+use Leadvertex\Plugin\Core\Middleware\LanguageMiddleware;
 use Leadvertex\Plugin\Core\Middleware\ProtectedMiddleware;
 use Psr\Http\Server\RequestHandlerInterface;
 use Slim\App;
@@ -205,6 +206,7 @@ abstract class WebAppFactory extends AppFactory
     {
         $this->app = \Slim\Factory\AppFactory::create();
         $this->app->addRoutingMiddleware();
+        $this->app->add(new LanguageMiddleware());
 
         $this->app->get('/info', InfoAction::class);
         $this->app->put('/registration', RegistrationAction::class);
