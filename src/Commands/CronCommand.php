@@ -19,6 +19,7 @@ use XAKEPEHOK\Path\Path;
 
 class CronCommand extends Command
 {
+    const CHECK_PROCESS_STATUS_TIMEOUT = 3;
 
     private static array $commands = [];
 
@@ -63,6 +64,7 @@ class CronCommand extends Command
                         $output->writeln('<error>Finished:</error> ' . $cronLine);
                     }
                 }
+                sleep(self::CHECK_PROCESS_STATUS_TIMEOUT);
             }
         } while (count($processes) > 0);
 
