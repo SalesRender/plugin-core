@@ -5,12 +5,12 @@
  * @author Timur Kasumov (XAKEPEHOK)
  */
 
-namespace Leadvertex\Plugin\Core\Actions\Batch;
+namespace SalesRender\Plugin\Core\Actions\Batch;
 
 
-use Leadvertex\Plugin\Components\Batch\Batch;
-use Leadvertex\Plugin\Components\Batch\BatchContainer;
-use Leadvertex\Plugin\Core\Actions\ActionInterface;
+use SalesRender\Plugin\Components\Batch\Batch;
+use SalesRender\Plugin\Components\Batch\BatchContainer;
+use SalesRender\Plugin\Core\Actions\ActionInterface;
 use Slim\Http\Response;
 
 abstract class BatchAction implements ActionInterface

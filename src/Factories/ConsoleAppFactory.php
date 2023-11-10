@@ -5,19 +5,19 @@
  * @author Timur Kasumov (XAKEPEHOK)
  */
 
-namespace Leadvertex\Plugin\Core\Factories;
+namespace SalesRender\Plugin\Core\Factories;
 
 
-use Leadvertex\Plugin\Components\Batch\Commands\BatchHandleCommand;
-use Leadvertex\Plugin\Components\Batch\Commands\BatchQueueCommand;
-use Leadvertex\Plugin\Components\Db\Commands\CreateTablesCommand;
-use Leadvertex\Plugin\Components\Db\Commands\TableCleanerCommand;
-use Leadvertex\Plugin\Components\DirectoryCleaner\DirectoryCleanerCommand;
-use Leadvertex\Plugin\Components\SpecialRequestDispatcher\Commands\SpecialRequestQueueCommand;
-use Leadvertex\Plugin\Components\SpecialRequestDispatcher\Commands\SpecialRequestHandleCommand;
-use Leadvertex\Plugin\Components\Translations\Commands\LangAddCommand;
-use Leadvertex\Plugin\Components\Translations\Commands\LangUpdateCommand;
-use Leadvertex\Plugin\Core\Commands\CronCommand;
+use SalesRender\Plugin\Components\Batch\Commands\BatchHandleCommand;
+use SalesRender\Plugin\Components\Batch\Commands\BatchQueueCommand;
+use SalesRender\Plugin\Components\Db\Commands\CreateTablesCommand;
+use SalesRender\Plugin\Components\Db\Commands\TableCleanerCommand;
+use SalesRender\Plugin\Components\DirectoryCleaner\DirectoryCleanerCommand;
+use SalesRender\Plugin\Components\SpecialRequestDispatcher\Commands\SpecialRequestQueueCommand;
+use SalesRender\Plugin\Components\SpecialRequestDispatcher\Commands\SpecialRequestHandleCommand;
+use SalesRender\Plugin\Components\Translations\Commands\LangAddCommand;
+use SalesRender\Plugin\Components\Translations\Commands\LangUpdateCommand;
+use SalesRender\Plugin\Core\Commands\CronCommand;
 use Symfony\Component\Console\Application;
 
 abstract class ConsoleAppFactory extends AppFactory

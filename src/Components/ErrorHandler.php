@@ -5,10 +5,10 @@
  * @author Timur Kasumov (XAKEPEHOK)
  */
 
-namespace Leadvertex\Plugin\Core\Components;
+namespace SalesRender\Plugin\Core\Components;
 
 
-use Leadvertex\Plugin\Components\Settings\Exceptions\IntegritySettingsException;
+use SalesRender\Plugin\Components\Settings\Exceptions\IntegritySettingsException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Exception\HttpException;

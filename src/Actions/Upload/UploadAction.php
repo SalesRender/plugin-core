@@ -5,10 +5,10 @@
  * @author Timur Kasumov (XAKEPEHOK)
  */
 
-namespace Leadvertex\Plugin\Core\Actions\Upload;
+namespace SalesRender\Plugin\Core\Actions\Upload;
 
 
-use Leadvertex\Plugin\Core\Actions\ActionInterface;
+use SalesRender\Plugin\Core\Actions\ActionInterface;
 use Slim\Http\Response;
 use Slim\Http\ServerRequest;
 use Slim\Psr7\UploadedFile;

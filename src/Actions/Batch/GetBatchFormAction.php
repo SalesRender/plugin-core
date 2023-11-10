@@ -5,10 +5,10 @@
  * @author Timur Kasumov (XAKEPEHOK)
  */
 
-namespace Leadvertex\Plugin\Core\Actions\Batch;
+namespace SalesRender\Plugin\Core\Actions\Batch;
 
 
-use Leadvertex\Plugin\Components\Batch\BatchContainer;
+use SalesRender\Plugin\Components\Batch\BatchContainer;
 use Slim\Http\Response;
 use Slim\Http\ServerRequest;
 

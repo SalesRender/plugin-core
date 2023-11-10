@@ -5,10 +5,10 @@
  * @author Timur Kasumov (XAKEPEHOK)
  */
 
-namespace Leadvertex\Plugin\Core\Commands;
+namespace SalesRender\Plugin\Core\Commands;
 
 use Cron\CronExpression;
-use Leadvertex\Plugin\Components\Batch\BatchContainer;
+use SalesRender\Plugin\Components\Batch\BatchContainer;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputInterface;

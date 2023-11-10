@@ -6,7 +6,7 @@
  */
 
 
-namespace Leadvertex\Plugin\Core\Actions\Upload;
+namespace SalesRender\Plugin\Core\Actions\Upload;
 
 class UploadersContainer
 {

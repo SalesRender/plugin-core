@@ -5,11 +5,11 @@
  * @author Timur Kasumov (XAKEPEHOK)
  */
 
-namespace Leadvertex\Plugin\Core\Actions\Settings;
+namespace SalesRender\Plugin\Core\Actions\Settings;
 
 
-use Leadvertex\Plugin\Components\Settings\Settings;
-use Leadvertex\Plugin\Core\Actions\FormDataAction;
+use SalesRender\Plugin\Components\Settings\Settings;
+use SalesRender\Plugin\Core\Actions\FormDataAction;
 
 class GetSettingsDataAction extends FormDataAction
 {

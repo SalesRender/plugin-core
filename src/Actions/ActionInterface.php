@@ -5,7 +5,7 @@
  * @author Timur Kasumov (XAKEPEHOK)
  */
 
-namespace Leadvertex\Plugin\Core\Actions;
+namespace SalesRender\Plugin\Core\Actions;
 
 
 use Slim\Http\Response;

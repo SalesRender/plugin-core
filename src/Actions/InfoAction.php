@@ -5,11 +5,11 @@
  * @author Timur Kasumov (XAKEPEHOK)
  */
 
-namespace Leadvertex\Plugin\Core\Actions;
+namespace SalesRender\Plugin\Core\Actions;
 
 
-use Leadvertex\Plugin\Components\Info\Info;
-use Leadvertex\Plugin\Core\Helpers\PathHelper;
+use SalesRender\Plugin\Components\Info\Info;
+use SalesRender\Plugin\Core\Helpers\PathHelper;
 use Slim\Http\Response;
 use Slim\Http\ServerRequest;
 

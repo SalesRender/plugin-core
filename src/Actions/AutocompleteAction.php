@@ -5,11 +5,11 @@
  * @author Timur Kasumov (XAKEPEHOK)
  */
 
-namespace Leadvertex\Plugin\Core\Actions;
+namespace SalesRender\Plugin\Core\Actions;
 
 
-use Leadvertex\Plugin\Components\Form\Autocomplete\AutocompleteRegistry;
-use Leadvertex\Plugin\Components\Form\Exceptions\AutocompleteRegistryException;
+use SalesRender\Plugin\Components\Form\Autocomplete\AutocompleteRegistry;
+use SalesRender\Plugin\Components\Form\Exceptions\AutocompleteRegistryException;
 use Slim\Http\Response;
 use Slim\Http\ServerRequest;
 

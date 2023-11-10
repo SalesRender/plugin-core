@@ -5,12 +5,12 @@
  * @author Timur Kasumov (XAKEPEHOK)
  */
 
-namespace Leadvertex\Plugin\Core\Actions;
+namespace SalesRender\Plugin\Core\Actions;
 
 
-use Leadvertex\Plugin\Components\Form\FieldDefinitions\PasswordDefinition;
-use Leadvertex\Plugin\Components\Form\Form;
-use Leadvertex\Plugin\Components\Form\FormData;
+use SalesRender\Plugin\Components\Form\FieldDefinitions\PasswordDefinition;
+use SalesRender\Plugin\Components\Form\Form;
+use SalesRender\Plugin\Components\Form\FormData;
 use Slim\Http\Response;
 use Slim\Http\ServerRequest;
 

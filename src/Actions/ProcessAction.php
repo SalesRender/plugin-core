@@ -5,10 +5,10 @@
  * @author Timur Kasumov (XAKEPEHOK)
  */
 
-namespace Leadvertex\Plugin\Core\Actions;
+namespace SalesRender\Plugin\Core\Actions;
 
 
-use Leadvertex\Plugin\Components\Batch\Process\Process;
+use SalesRender\Plugin\Components\Batch\Process\Process;
 use Slim\Http\Response;
 use Slim\Http\ServerRequest;
 

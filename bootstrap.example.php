@@ -5,17 +5,17 @@
  * @author Timur Kasumov (XAKEPEHOK)
  */
 
-use Leadvertex\Plugin\Components\Batch\BatchContainer;
-use Leadvertex\Plugin\Components\Db\Components\Connector;
-use Leadvertex\Plugin\Components\Form\Autocomplete\AutocompleteRegistry;
-use Leadvertex\Plugin\Components\Form\Form;
-use Leadvertex\Plugin\Components\Info\Developer;
-use Leadvertex\Plugin\Components\Info\Info;
-use Leadvertex\Plugin\Components\Info\PluginType;
-use Leadvertex\Plugin\Components\Settings\Settings;
-use Leadvertex\Plugin\Components\Translations\Translator;
-use Leadvertex\Plugin\Core\Actions\Upload\LocalUploadAction;
-use Leadvertex\Plugin\Core\Actions\Upload\UploadersContainer;
+use SalesRender\Plugin\Components\Batch\BatchContainer;
+use SalesRender\Plugin\Components\Db\Components\Connector;
+use SalesRender\Plugin\Components\Form\Autocomplete\AutocompleteRegistry;
+use SalesRender\Plugin\Components\Form\Form;
+use SalesRender\Plugin\Components\Info\Developer;
+use SalesRender\Plugin\Components\Info\Info;
+use SalesRender\Plugin\Components\Info\PluginType;
+use SalesRender\Plugin\Components\Settings\Settings;
+use SalesRender\Plugin\Components\Translations\Translator;
+use SalesRender\Plugin\Core\Actions\Upload\LocalUploadAction;
+use SalesRender\Plugin\Core\Actions\Upload\UploadersContainer;
 use Medoo\Medoo;
 use XAKEPEHOK\Path\Path;
 

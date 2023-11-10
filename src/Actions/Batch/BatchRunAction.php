@@ -5,13 +5,13 @@
  * @author Timur Kasumov (XAKEPEHOK)
  */
 
-namespace Leadvertex\Plugin\Core\Actions\Batch;
+namespace SalesRender\Plugin\Core\Actions\Batch;
 
 
-use Leadvertex\Plugin\Components\Access\Token\GraphqlInputToken;
-use Leadvertex\Plugin\Components\Batch\Batch;
-use Leadvertex\Plugin\Components\Batch\BatchContainer;
-use Leadvertex\Plugin\Components\Batch\Process\Process;
+use SalesRender\Plugin\Components\Access\Token\GraphqlInputToken;
+use SalesRender\Plugin\Components\Batch\Batch;
+use SalesRender\Plugin\Components\Batch\BatchContainer;
+use SalesRender\Plugin\Components\Batch\Process\Process;
 use Slim\Http\Response;
 use Slim\Http\ServerRequest;
 

@@ -1,5 +1,5 @@
 <?php
-namespace Leadvertex\Plugin\Core\Factories;
+namespace SalesRender\Plugin\Core\Factories;
 
 use Dotenv\Dotenv;
 use Dotenv\Repository\Adapter\EnvConstAdapter;

@@ -5,10 +5,10 @@
  * @author Timur Kasumov (XAKEPEHOK)
  */
 
-namespace Leadvertex\Plugin\Core\Middleware;
+namespace SalesRender\Plugin\Core\Middleware;
 
 
-use Leadvertex\Plugin\Components\Translations\Translator;
+use SalesRender\Plugin\Components\Translations\Translator;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Slim\Exception\HttpException;

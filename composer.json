@@ -1,13 +1,13 @@
 {
-  "name": "leadvertex/plugin-core",
-  "description": "LeadVertex plugin core component",
+  "name": "salesrender/plugin-core",
+  "description": "SalesRender plugin core component",
   "type": "library",
   "minimum-stability": "stable",
   "license": "proprietary",
   "authors": [
     {
       "name": "Timur Kasumov aka XAKEPEHOK",
-      "email": "support@leadvertex.com"
+      "email": "support@salesrender.com"
     }
   ],
   "require": {
@@ -20,14 +20,14 @@
     "ramsey/uuid": "^3.9",
     "vlucas/phpdotenv": "^4.1",
     "adbario/php-dot-notation": "^2.2",
-    "leadvertex/plugin-component-form": "^0.10.0",
-    "leadvertex/plugin-component-info": "^0.1.1",
-    "leadvertex/plugin-component-api-client": "^0.6.0",
-    "leadvertex/plugin-component-translations": "^0.1.1",
-    "leadvertex/plugin-component-directory-cleaner": "^0.1.0",
-    "leadvertex/plugin-component-settings": "^0.2.0",
-    "leadvertex/plugin-component-batch": "^0.3.0",
-    "leadvertex/plugin-component-request-dispatcher": "^0.3.0",
+    "salesrender/plugin-component-form": "^0.10.0",
+    "salesrender/plugin-component-info": "^0.1.1",
+    "salesrender/plugin-component-api-client": "^0.6.0",
+    "salesrender/plugin-component-translations": "^0.1.1",
+    "salesrender/plugin-component-directory-cleaner": "^0.1.0",
+    "salesrender/plugin-component-settings": "^0.2.0",
+    "salesrender/plugin-component-batch": "^0.3.0",
+    "salesrender/plugin-component-request-dispatcher": "^0.3.0",
     "xakepehok/path": "^0.2.1",
     "dragonmantank/cron-expression": "^3.1"
   },

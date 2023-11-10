@@ -5,15 +5,15 @@
  * @author Timur Kasumov (XAKEPEHOK)
  */
 
-namespace Leadvertex\Plugin\Core\Actions\Batch;
+namespace SalesRender\Plugin\Core\Actions\Batch;
 
 
-use Leadvertex\Plugin\Components\Access\Token\GraphqlInputToken;
-use Leadvertex\Plugin\Components\ApiClient\ApiFilterSortPaginate;
-use Leadvertex\Plugin\Components\ApiClient\ApiSort;
-use Leadvertex\Plugin\Components\Batch\Batch;
-use Leadvertex\Plugin\Components\Translations\Translator;
-use Leadvertex\Plugin\Core\Actions\ActionInterface;
+use SalesRender\Plugin\Components\Access\Token\GraphqlInputToken;
+use SalesRender\Plugin\Components\ApiClient\ApiFilterSortPaginate;
+use SalesRender\Plugin\Components\ApiClient\ApiSort;
+use SalesRender\Plugin\Components\Batch\Batch;
+use SalesRender\Plugin\Components\Translations\Translator;
+use SalesRender\Plugin\Core\Actions\ActionInterface;
 use Slim\Http\Response;
 use Slim\Http\ServerRequest;
 

@@ -5,13 +5,13 @@
  * @author Timur Kasumov (XAKEPEHOK)
  */
 
-namespace Leadvertex\Plugin\Core\Actions;
+namespace SalesRender\Plugin\Core\Actions;
 
 use Lcobucci\JWT\Parser;
-use Leadvertex\Plugin\Components\Access\PublicKey\PublicKey;
-use Leadvertex\Plugin\Components\Access\Registration\Registration;
-use Leadvertex\Plugin\Components\Db\Components\Connector;
-use Leadvertex\Plugin\Components\Db\Components\PluginReference;
+use SalesRender\Plugin\Components\Access\PublicKey\PublicKey;
+use SalesRender\Plugin\Components\Access\Registration\Registration;
+use SalesRender\Plugin\Components\Db\Components\Connector;
+use SalesRender\Plugin\Components\Db\Components\PluginReference;
 use Slim\Exception\HttpException;
 use Slim\Http\Response;
 use Slim\Http\ServerRequest;

@@ -5,28 +5,28 @@
  * @author Timur Kasumov (XAKEPEHOK)
  */
 
-namespace Leadvertex\Plugin\Core\Factories;
+namespace SalesRender\Plugin\Core\Factories;
 
 
-use Leadvertex\Plugin\Components\Settings\Settings;
-use Leadvertex\Plugin\Core\Actions\ActionInterface;
-use Leadvertex\Plugin\Core\Actions\AutocompleteAction;
-use Leadvertex\Plugin\Core\Actions\Batch\BatchPrepareAction;
-use Leadvertex\Plugin\Core\Actions\Batch\BatchRunAction;
-use Leadvertex\Plugin\Core\Actions\Batch\GetBatchFormAction;
-use Leadvertex\Plugin\Core\Actions\Batch\PutBatchOptionsAction;
-use Leadvertex\Plugin\Core\Actions\FormAction;
-use Leadvertex\Plugin\Core\Actions\InfoAction;
-use Leadvertex\Plugin\Core\Actions\ProcessAction;
-use Leadvertex\Plugin\Core\Actions\RegistrationAction;
-use Leadvertex\Plugin\Core\Actions\RobotsActions;
-use Leadvertex\Plugin\Core\Actions\Settings\GetSettingsDataAction;
-use Leadvertex\Plugin\Core\Actions\Settings\PutSettingsDataAction;
-use Leadvertex\Plugin\Core\Actions\SpecialRequestAction;
-use Leadvertex\Plugin\Core\Actions\Upload\UploadersContainer;
-use Leadvertex\Plugin\Core\Components\ErrorHandler;
-use Leadvertex\Plugin\Core\Middleware\LanguageMiddleware;
-use Leadvertex\Plugin\Core\Middleware\ProtectedMiddleware;
+use SalesRender\Plugin\Components\Settings\Settings;
+use SalesRender\Plugin\Core\Actions\ActionInterface;
+use SalesRender\Plugin\Core\Actions\AutocompleteAction;
+use SalesRender\Plugin\Core\Actions\Batch\BatchPrepareAction;
+use SalesRender\Plugin\Core\Actions\Batch\BatchRunAction;
+use SalesRender\Plugin\Core\Actions\Batch\GetBatchFormAction;
+use SalesRender\Plugin\Core\Actions\Batch\PutBatchOptionsAction;
+use SalesRender\Plugin\Core\Actions\FormAction;
+use SalesRender\Plugin\Core\Actions\InfoAction;
+use SalesRender\Plugin\Core\Actions\ProcessAction;
+use SalesRender\Plugin\Core\Actions\RegistrationAction;
+use SalesRender\Plugin\Core\Actions\RobotsActions;
+use SalesRender\Plugin\Core\Actions\Settings\GetSettingsDataAction;
+use SalesRender\Plugin\Core\Actions\Settings\PutSettingsDataAction;
+use SalesRender\Plugin\Core\Actions\SpecialRequestAction;
+use SalesRender\Plugin\Core\Actions\Upload\UploadersContainer;
+use SalesRender\Plugin\Core\Components\ErrorHandler;
+use SalesRender\Plugin\Core\Middleware\LanguageMiddleware;
+use SalesRender\Plugin\Core\Middleware\ProtectedMiddleware;
 use Psr\Http\Server\RequestHandlerInterface;
 use Slim\App;
 use Slim\Http\Response;

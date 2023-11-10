@@ -5,10 +5,10 @@
  * @author Timur Kasumov (XAKEPEHOK)
  */
 
-namespace Leadvertex\Plugin\Core\Actions\Upload;
+namespace SalesRender\Plugin\Core\Actions\Upload;
 
-use Leadvertex\Plugin\Components\Db\Components\Connector;
-use Leadvertex\Plugin\Core\Helpers\PathHelper;
+use SalesRender\Plugin\Components\Db\Components\Connector;
+use SalesRender\Plugin\Core\Helpers\PathHelper;
 use Ramsey\Uuid\Uuid;
 use Slim\Http\Response;
 use Slim\Psr7\UploadedFile;
