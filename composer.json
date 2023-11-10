@@ -33,7 +33,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Leadvertex\\Plugin\\Core\\": "src/"
+      "SalesRender\\Plugin\\Core\\": "src/"
     }
   }
 }
