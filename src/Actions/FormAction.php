@@ -8,6 +8,7 @@
 namespace SalesRender\Plugin\Core\Actions;
 
 
+use SalesRender\Plugin\Components\Form\Form;
 use Slim\Http\Response;
 use Slim\Http\ServerRequest;
 
@@ -24,7 +25,8 @@ class FormAction implements ActionInterface
 
     public function __invoke(ServerRequest $request, Response $response, array $args): Response
     {
-        $form = ($this->form)();
+        /** @var Form $form */
+        $form = ($this->form)($request->getParsedBody() ?? []);
 
         if (is_null($form)) {
             return $response->withStatus(404);
