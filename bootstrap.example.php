@@ -50,7 +50,7 @@ Info::config(
 );
 
 # 5. Configure settings form
-Settings::setForm(fn() => new Form());
+Settings::setForm(fn(array $context) => new Form($context));
 
 # 6. Configure form autocompletes (or remove this block if dont used)
 AutocompleteRegistry::config(function (string $name) {
@@ -63,11 +63,11 @@ AutocompleteRegistry::config(function (string $name) {
 
 # 7. Configure batch forms and handler (or remove this block if dont used)
 BatchContainer::config(
-    function (int $number) {
+    function (int $number, array $context) {
 //    switch ($number) {
-//        case 1: return new Form();
-//        case 2: return new Form();
-//        case 3: return new Form();
+//        case 1: return new Form($context);
+//        case 2: return new Form($context);
+//        case 3: return new Form($context);
 //        default: return null;
 //    }
     },
