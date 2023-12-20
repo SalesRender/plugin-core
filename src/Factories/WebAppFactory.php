@@ -52,7 +52,7 @@ abstract class WebAppFactory extends AppFactory
     {
         $this->addForm(
             'settings',
-            fn() => Settings::getForm(),
+            fn(array $context) => Settings::getForm($context),
             new PutSettingsDataAction(),
             new GetSettingsDataAction(),
         );

@@ -23,6 +23,6 @@ class GetBatchFormAction extends BatchAction
             return $error;
         }
 
-        return $response->withJson(BatchContainer::getForm($number));
+        return $response->withJson(BatchContainer::getForm($number, $request->getParsedBody() ?? []));
     }
 }
