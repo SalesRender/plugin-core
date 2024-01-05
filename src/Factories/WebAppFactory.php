@@ -228,6 +228,8 @@ abstract class WebAppFactory extends AppFactory
         $this->app->get('/robots.txt', RobotsActions::class);
 
         $this->addSettingsActions();
+        $this->addAutocompleteAction();
+        $this->addTablePreviewAction();
         $this->addUploaders();
 
         $this->app->setBasePath((function () {
