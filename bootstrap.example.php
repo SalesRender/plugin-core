@@ -9,6 +9,7 @@ use SalesRender\Plugin\Components\Batch\BatchContainer;
 use SalesRender\Plugin\Components\Db\Components\Connector;
 use SalesRender\Plugin\Components\Form\Autocomplete\AutocompleteRegistry;
 use SalesRender\Plugin\Components\Form\Form;
+use SalesRender\Plugin\Components\Form\TableView\TablePreviewRegistry;
 use SalesRender\Plugin\Components\Info\Developer;
 use SalesRender\Plugin\Components\Info\Info;
 use SalesRender\Plugin\Components\Info\PluginType;
@@ -61,7 +62,16 @@ AutocompleteRegistry::config(function (string $name) {
 //    }
 });
 
-# 7. Configure batch forms and handler (or remove this block if dont used)
+# 7. Configure form autocompletes (or remove this block if dont used)
+TablePreviewRegistry::config(function (string $name) {
+//    switch ($name) {
+//        case 'excel': return new ExcelTablePreview();
+//        case 'calc': return new CalcTablePreview();
+//        default: return null;
+//    }
+});
+
+# 8. Configure batch forms and handler (or remove this block if dont used)
 BatchContainer::config(
     function (int $number, array $context) {
 //    switch ($number) {

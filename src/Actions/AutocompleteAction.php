@@ -30,15 +30,17 @@ class AutocompleteAction implements ActionInterface
         }
 
         $query = $request->getQueryParam('query');
+        $dependencies = json_decode($request->getQueryParam('dep', '[]'), true);
+        $context = json_decode($request->getQueryParam('context', '[]'), true);
 
         if (is_array($query)) {
             return $response->withJson(
-                $autocomplete->values($query)
+                $autocomplete->values($query, $dependencies, $context)
             );
         }
 
         return $response->withJson(
-            $autocomplete->query($query)
+            $autocomplete->query($query, $dependencies, $context)
         );
     }
 }

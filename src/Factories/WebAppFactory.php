@@ -23,6 +23,7 @@ use SalesRender\Plugin\Core\Actions\RobotsActions;
 use SalesRender\Plugin\Core\Actions\Settings\GetSettingsDataAction;
 use SalesRender\Plugin\Core\Actions\Settings\PutSettingsDataAction;
 use SalesRender\Plugin\Core\Actions\SpecialRequestAction;
+use SalesRender\Plugin\Core\Actions\TablePreviewAction;
 use SalesRender\Plugin\Core\Actions\Upload\UploadersContainer;
 use SalesRender\Plugin\Core\Components\ErrorHandler;
 use SalesRender\Plugin\Core\Middleware\LanguageMiddleware;
@@ -84,6 +85,7 @@ abstract class WebAppFactory extends AppFactory
 
         $this->addProcessAction();
         $this->addAutocompleteAction();
+        $this->addTablePreviewAction();
 
         return $this;
     }
@@ -96,6 +98,19 @@ abstract class WebAppFactory extends AppFactory
 
         $this->app
             ->get('/protected/autocomplete/{name}', AutocompleteAction::class)
+            ->add($this->protected);
+
+        return $this;
+    }
+
+    public function addTablePreviewAction(): self
+    {
+        if (!$this->registerActions(__METHOD__)) {
+            return $this;
+        }
+
+        $this->app
+            ->get('/protected/preview/table/{name}', TablePreviewAction::class)
             ->add($this->protected);
 
         return $this;
