@@ -85,6 +85,7 @@ class CronCommand extends Command
         $tasks = array_filter($tasks, function (string $value) {
             return !empty($value);
         });
+        $tasks = array_unique($tasks);
 
         $result = [];
         foreach ($tasks as $task) {
