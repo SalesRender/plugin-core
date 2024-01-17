@@ -8,6 +8,7 @@
 namespace SalesRender\Plugin\Core\Factories;
 
 
+use SalesRender\Plugin\Components\Batch\BatchContainer;
 use SalesRender\Plugin\Components\Batch\Commands\BatchHandleCommand;
 use SalesRender\Plugin\Components\Batch\Commands\BatchQueueCommand;
 use SalesRender\Plugin\Components\Db\Commands\CreateTablesCommand;
@@ -19,6 +20,8 @@ use SalesRender\Plugin\Components\Translations\Commands\LangAddCommand;
 use SalesRender\Plugin\Components\Translations\Commands\LangUpdateCommand;
 use SalesRender\Plugin\Core\Commands\CronCommand;
 use Symfony\Component\Console\Application;
+use Throwable;
+use XAKEPEHOK\Path\Path;
 
 abstract class ConsoleAppFactory extends AppFactory
 {
@@ -59,6 +62,14 @@ abstract class ConsoleAppFactory extends AppFactory
 
         $app->add(new SpecialRequestQueueCommand());
         $app->add(new SpecialRequestHandleCommand());
+
+        $console = '* * * * * ' . PHP_BINARY . ' ' . Path::root()->down('console.php');
+        try {
+            BatchContainer::getHandler();
+            CronCommand::addTask($console . ' batch:queue');
+        } catch (Throwable $throwable) {}
+
+        CronCommand::addTask($console . ' specialRequest:queue');
 
         $app->add(new CronCommand());
 

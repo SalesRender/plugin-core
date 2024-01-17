@@ -8,13 +8,11 @@
 namespace SalesRender\Plugin\Core\Commands;
 
 use Cron\CronExpression;
-use SalesRender\Plugin\Components\Batch\BatchContainer;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Process\Process;
-use Throwable;
 use XAKEPEHOK\Path\Path;
 
 class CronCommand extends Command
@@ -76,19 +74,19 @@ class CronCommand extends Command
         $crontabFile = Path::root()->down('cron.txt');
         $crontab = '';
         if (file_exists((string)$crontabFile)) {
-            $crontab = file_get_contents((string)$crontabFile);
-        }
-
-        $crontab .= PHP_EOL . $this->getDefaultTasks();
-
-        foreach (self::$commands as $command) {
-            $crontab .= trim($command) . PHP_EOL;
+            $crontab = trim(file_get_contents((string)$crontabFile));
         }
 
         $crontab = str_replace("\r\n", "\n", trim($crontab));
+        $crontab = implode("\n", [$crontab, ...self::$commands]);
+
+        $tasks = explode("\n", $crontab);
+        $tasks = array_map('trim', $tasks);
+        $tasks = array_filter($tasks, function (string $value) {
+            return !empty($value);
+        });
 
         $result = [];
-        $tasks = explode("\n", $crontab);
         foreach ($tasks as $task) {
             $parts = explode(' ', $task, 6);
             $expression = implode(' ', array_slice($parts, 0, 5));
@@ -97,20 +95,6 @@ class CronCommand extends Command
         }
 
         return $result;
-    }
-
-    protected function getDefaultTasks(): string
-    {
-        $default = '* * * * * ' . PHP_BINARY . ' ' . Path::root()->down('console.php');
-        $crontab = '';
-        try {
-            BatchContainer::getHandler();
-            $crontab = $default . ' batch:queue' . PHP_EOL;
-        } catch (Throwable $throwable) {
-        }
-
-        $crontab .= $default . ' specialRequest:queue' . PHP_EOL;
-        return $crontab;
     }
 
     protected function configure()
