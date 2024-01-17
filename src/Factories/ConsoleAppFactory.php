@@ -63,16 +63,25 @@ abstract class ConsoleAppFactory extends AppFactory
         $app->add(new SpecialRequestQueueCommand());
         $app->add(new SpecialRequestHandleCommand());
 
-        $console = '* * * * * ' . PHP_BINARY . ' ' . Path::root()->down('console.php');
         try {
             BatchContainer::getHandler();
-            CronCommand::addTask($console . ' batch:queue');
+            $this->addCronTask('* * * * *', 'batch:queue');
         } catch (Throwable $throwable) {}
-
-        CronCommand::addTask($console . ' specialRequest:queue');
+        $this->addCronTask('* * * * *', 'specialRequest:queue');
 
         $app->add(new CronCommand());
 
         return $app;
     }
+
+    protected function addCronTask(string $schedule, string $phpConsoleCommand): void
+    {
+        CronCommand::addTask(implode(" ", [
+            trim($schedule),
+            PHP_BINARY,
+            Path::root()->down('console.php'),
+            trim($phpConsoleCommand)
+        ]));
+    }
+
 }
