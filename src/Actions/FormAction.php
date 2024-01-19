@@ -25,7 +25,7 @@ class FormAction implements ActionInterface
 
     public function __invoke(ServerRequest $request, Response $response, array $args): Response
     {
-        $context = $request->getQueryParam('context', $request->getParsedBody() ?? []);
+        $context = json_decode($request->getQueryParam('context', '[]'), true);
 
         /** @var Form $form */
         $form = ($this->form)($context);
