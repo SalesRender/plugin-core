@@ -22,11 +22,11 @@ class MarkdownPreviewAction implements ActionInterface
             return $response->withStatus(404);
         }
 
-        return $response
-            ->withHeader('Content-Type', 'text/plain')
-            ->write($preview->render(
+        return $response->withJson(
+            $preview->render(
                 json_decode($request->getQueryParam('dep', '[]'), true),
                 json_decode($request->getQueryParam('context', '[]'), true)
-            ));
+            )
+        );
     }
 }
