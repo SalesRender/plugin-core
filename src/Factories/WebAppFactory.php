@@ -17,6 +17,7 @@ use SalesRender\Plugin\Core\Actions\Batch\GetBatchFormAction;
 use SalesRender\Plugin\Core\Actions\Batch\PutBatchOptionsAction;
 use SalesRender\Plugin\Core\Actions\FormAction;
 use SalesRender\Plugin\Core\Actions\InfoAction;
+use SalesRender\Plugin\Core\Actions\MarkdownPreviewAction;
 use SalesRender\Plugin\Core\Actions\ProcessAction;
 use SalesRender\Plugin\Core\Actions\RegistrationAction;
 use SalesRender\Plugin\Core\Actions\RobotsActions;
@@ -86,6 +87,7 @@ abstract class WebAppFactory extends AppFactory
         $this->addProcessAction();
         $this->addAutocompleteAction();
         $this->addTablePreviewAction();
+        $this->addMarkdownPreviewAction();
 
         return $this;
     }
@@ -111,6 +113,19 @@ abstract class WebAppFactory extends AppFactory
 
         $this->app
             ->get('/protected/preview/table/{name}', TablePreviewAction::class)
+            ->add($this->protected);
+
+        return $this;
+    }
+
+    public function addMarkdownPreviewAction(): self
+    {
+        if (!$this->registerActions(__METHOD__)) {
+            return $this;
+        }
+
+        $this->app
+            ->get('/protected/preview/markdown/{name}', MarkdownPreviewAction::class)
             ->add($this->protected);
 
         return $this;
@@ -230,6 +245,7 @@ abstract class WebAppFactory extends AppFactory
         $this->addSettingsActions();
         $this->addAutocompleteAction();
         $this->addTablePreviewAction();
+        $this->addMarkdownPreviewAction();
         $this->addUploaders();
 
         $this->app->setBasePath((function () {
