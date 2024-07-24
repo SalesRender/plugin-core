@@ -23,6 +23,7 @@ use SalesRender\Plugin\Core\Actions\RegistrationAction;
 use SalesRender\Plugin\Core\Actions\RobotsActions;
 use SalesRender\Plugin\Core\Actions\Settings\GetSettingsDataAction;
 use SalesRender\Plugin\Core\Actions\Settings\PutSettingsDataAction;
+use SalesRender\Plugin\Core\Actions\Settings\SettingsAccessMiddleware;
 use SalesRender\Plugin\Core\Actions\SpecialRequestAction;
 use SalesRender\Plugin\Core\Actions\TablePreviewAction;
 use SalesRender\Plugin\Core\Actions\Upload\UploadersContainer;
@@ -57,6 +58,7 @@ abstract class WebAppFactory extends AppFactory
             fn(array $context) => Settings::getForm($context),
             new PutSettingsDataAction(),
             new GetSettingsDataAction(),
+            new SettingsAccessMiddleware()
         );
 
         return $this;
@@ -214,17 +216,30 @@ abstract class WebAppFactory extends AppFactory
             ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, OPTIONS');
     }
 
-    protected function addForm(string $name, callable $form, ActionInterface $put, ?ActionInterface $get = null): self
+    protected function addForm(string $name, callable $form, ActionInterface $put, ?ActionInterface $get = null, ?callable $middleware = null): self
     {
         if (!$this->registerActions($name)) {
             return $this;
         }
 
-        $this->app->get("/protected/forms/{$name}", new FormAction($form))->add($this->protected);
-        $this->app->put("/protected/data/{$name}", $put)->add($this->protected);
+        $formRoute = $this->app->get("/protected/forms/{$name}", new FormAction($form));
+        if ($middleware) {
+            $formRoute = $formRoute->add($middleware);
+        }
+        $formRoute->add($this->protected);
+
+        $formPutRoute = $this->app->put("/protected/data/{$name}", $put);
+        if ($middleware) {
+            $formPutRoute = $formPutRoute->add($middleware);
+        }
+        $formPutRoute->add($this->protected);
 
         if ($get) {
-            $this->app->get("/protected/data/{$name}", $get)->add($this->protected);
+            $formGetRoute = $this->app->get("/protected/data/{$name}", $get);
+            if ($middleware) {
+                $formGetRoute = $formGetRoute->add($middleware);
+            }
+            $formGetRoute->add($this->protected);
         }
 
         $this->addAutocompleteAction();
